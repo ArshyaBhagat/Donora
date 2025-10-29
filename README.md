@@ -17,7 +17,7 @@ It uses a **matching algorithm** based on blood group and organ compatibility, g
 
 ### 👩‍💻 Developer
 **Arshya Bhagat** — Full-Stack Developer & Project Manager  
-Built as part of a college-level project at M.E.S. Garware College of Commerce (Autonomous), reflecting technical proficiency, problem-solving, and social awareness.
+Spearheaded the complete development of Donora, overseeing both backend and frontend functionalities. Independently implemented the donor–recipient matching logic, managed database integration, and ensured seamless user flow across the platform. The project was developed as part of the final-year curriculum at M.E.S. Garware College of Commerce (Autonomous), showcasing strong technical expertise, leadership, and commitment to social impact through technology.
 
 ### ❤️ Vision
 Leveraging technology to simplify the organ donation process and promote social good.

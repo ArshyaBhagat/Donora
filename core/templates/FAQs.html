@@ -1,0 +1,734 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FAQs – Donora</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Professional FAQ Styles */
+
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      margin-left: auto;
+      text-align: right;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+    }
+
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #2c3e50;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      min-height: 100vh;
+    }
+
+    .faq-hero {
+      background: linear-gradient(135deg, #CFEDEF 0%, #A8D8E0 100%);
+      color: #004E52;
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .faq-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .faq-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .faq-hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      letter-spacing: -0.02em;
+    }
+
+    .faq-hero p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+
+
+
+    .faq-container {
+      max-width: 1000px;
+      margin: -40px auto 80px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .faq-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #004E52;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: #64748b;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .faq-section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .faq-section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 15px;
+      letter-spacing: -0.02em;
+    }
+
+    .faq-section-title p {
+      font-size: 1.1rem;
+      color: #64748b;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      transform: translateY(-2px);
+    }
+
+    .faq-question {
+      padding: 25px 30px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .faq-question:hover {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    }
+
+    .faq-question.active {
+      background: linear-gradient(135deg, #CFEDEF 0%, #A8D8E0 100%);
+      color: #004E52;
+    }
+
+    .faq-question-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: inherit;
+      margin: 0;
+      padding-right: 20px;
+      line-height: 1.4;
+    }
+
+    .faq-question.active .faq-question-text {
+      color: #004E52;
+    }
+
+    .faq-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #004E52;
+      color: #CFEDEF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-question.active .faq-toggle {
+      background: #004E52;
+      color: #CFEDEF;
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 30px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      background: white;
+    }
+
+    .faq-answer.active {
+      padding: 30px;
+      max-height: 500px;
+    }
+
+    .faq-answer-content {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #475569;
+    }
+
+    .faq-answer-content strong {
+      color: #1e293b;
+      font-weight: 600;
+    }
+
+    .faq-highlight {
+      background: linear-gradient(120deg, #CFEDEF 0%, #A8D8E0 100%);
+      color: #004E52;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .faq-hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .faq-hero p {
+        font-size: 1.1rem;
+      }
+
+      .faq-container {
+        padding: 0 15px;
+        margin-top: -30px;
+      }
+
+      .faq-question {
+        padding: 20px;
+      }
+
+      .faq-question-text {
+        font-size: 1.1rem;
+      }
+
+      .faq-answer.active {
+        padding: 20px;
+      }
+
+      .faq-section-title h2 {
+        font-size: 2rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .faq-hero {
+        padding: 60px 0 40px;
+      }
+
+      .faq-hero h1 {
+        font-size: 2rem;
+      }
+
+      .stat-card {
+        padding: 20px 15px;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+    }
+
+    /* Header customization */
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+<body>
+        <div style="overflow: hidden;">
+            <header class="site-header">
+              {% include 'header.html' %}
+            </header>
+<!-- Hero Section -->
+<section class="faq-hero">
+  <div class="faq-hero-content">
+    <h1>Frequently Asked Questions</h1>
+    <p>Find answers to common questions about organ donation and our platform</p>
+
+  </div>
+</section>
+
+<!-- Main FAQ Content -->
+<div class="faq-container">
+  <!-- Statistics Section -->
+  <div class="faq-stats">
+    <div class="stat-card">
+      <div class="stat-number">50K+</div>
+      <div class="stat-label">Questions Answered</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">25K+</div>
+      <div class="stat-label">Happy Users</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Support Available</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Free Service</div>
+    </div>
+  </div>
+
+  <!-- FAQ Section Title -->
+  <div class="faq-section-title">
+    <h2>Common Questions</h2>
+    <p>Everything you need to know about organ donation and our platform</p>
+  </div>
+
+  <!-- FAQ Items -->
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h3 class="faq-question-text">Is the entire donation process really free?</h3>
+        <div class="faq-toggle">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+    <div class="faq-answer">
+        <div class="faq-answer-content">
+          Yes, the entire donation process on Donora is <span class="faq-highlight">100% free</span> for both donors and recipients. From the initial registration to the final operation, there are no hidden fees, consultation charges, or test costs. This includes all the required medical evaluations like blood tests, crossmatching, HLA typing, and any other procedures necessary for safe transplantation.
+      <br><br>
+      Our goal is to ensure that finances are never a barrier to saving lives. Thanks to our collaboration with government initiatives and our partner hospital, every medical cost is covered. You don’t need to worry about paying for anything—Donora takes care of it all so you can focus on giving or receiving the gift of life.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h3 class="faq-question-text">Where will the medical tests and surgeries take place?</h3>
+        <div class="faq-toggle">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          All tests and surgical procedures take place at our official partner hospital, <strong>SaveLife Hospital</strong>. This ensures the entire process happens under the supervision of qualified doctors, with professional medical care and legal compliance.
+          <br><br>
+          Once a suitable donor-recipient match is found, The schedule for the hospital is then made available on your <span class="faq-highlight">personal notification section</span> on the Donora website. After you visit the hospital in-person a specific schedule is generated by the hospital, which includes your test dates, evaluation appointments, and operation timeline
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h3 class="faq-question-text">How is a match determined between a donor and a recipient?</h3>
+        <div class="faq-toggle">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          Matching is primarily based on <strong>blood group compatibility</strong>
+          <br><br>
+          Once a basic match is identified, additional compatibility tests such as <span class="faq-highlight">crossmatching and tissue typing, etc.</span> are done at SaveLife Hospital. These tests are entirely free, and only after successful results does the hospital proceed to the next steps in the transplant process.
+        </div>
+      </div>
+    </div>
+
+  <div class="faq-card animate_animated animate_fadeInUp">
+    <div class="faq-question">How will I know if I’m selected or matched?</div>
+    <div class="faq-answer">
+      You will be notified as soon as you’re matched with a compatible donor or recipient. Your Donora notification section will show a prominent alert.
+      <br><br>
+      After matching, a hospital schedule is generated for you, for in-person registration in the hospital . You can access all this information directly through your notification section at any time.
+    </div>
+  </div>
+
+  <div class="faq-card animate_animated animate_fadeInUp">
+    <div class="faq-question">Who can become a donor on Donora?</div>
+    <div class="faq-answer">
+      Anyone above 18 years of age who is medically fit can register as a donor on Donora. You can select which organ(s) you wish to donate, and your journey begins with a free and simple registration process.
+      <br><br>
+      During the registration, a health form will be presented to assess your eligibility. If a match is found, all tests and evaluations required to confirm your suitability are carried out at no cost to you.
+    </div>
+  </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h3 class="faq-question-text">What organs can be donated through Donora?</h3>
+        <div class="faq-toggle">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          Donora facilitates donation of various organs including <strong>kidney, liver, lung, skin.</strong> Each type of donation has specific requirements and procedures.
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h3 class="faq-question-text">How long does the matching process take?</h3>
+        <div class="faq-toggle">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          The matching process begins as soon as you register as a donor or recipient. After which, it can take anywhere from a few days to several weeks to find a suitable match, depending on various factors such as organ type, blood group, and medical compatibility.
+          <br><br>
+          Donora uses an algorithm to expedite this process, but it’s important to note that finding a match is not guaranteed. We encourage all users to keep their profiles updated and to be patient as we work to connect donors and recipients.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h3 class="faq-question-text">Is my personal information secure on Donora?</h3>
+        <div class="faq-toggle">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          We use advanced encryption techniques and follow strict privacy and security practices to safeguard your personal and medical information. All data is stored on secure servers with multiple layers of protection, and our platform is designed with healthcare-grade security in mind.
+          <br><br>
+          We never share your personal information without your explicit consent. Only authorized medical professionals involved in your care have access to relevant medical information. Your privacy and confidentiality are our <span class="faq-highlight">top priorities</span>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-about">
+      <img src="{% static 'images/removed.png' %}" alt="Logo">
+      <p>Donora is dedicated to saving lives through living organ donation awareness, kindness, and collective action. Together, we give the gift of life.</p>
+    </div>
+    <div class="footer-nav-blocks">
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+          <li><a href="{% url 'contactus' %}">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-get-involved">
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="{% url 'signup' %}">Become a Donor</a></li>
+          <li><a href="{% url 'signup' %}">Become a Recipient</a></li>
+        </ul>
+      </div>
+      <div class="footer-terms">
+        <h4>Terms & Conditions</h4>
+        <ul>
+          <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+          <li><a href="{% url 'terms_of_use' %}">Terms of Use</a></li>
+          <li><a href="{% url 'security' %}">Security</a></li>
+          <li><a href="{% url 'other_policies' %}">Other Policies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+      <p> <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;">123 Donora Lane, Pune, India</a></p>
+      <p>info@donora.ngo</p>
+      <p>+91 123 456 7890</p>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <div class="social-heading">
+        <hr class="line">
+        <span>Connect With Us</span>
+        <hr class="line">
+      </div>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" title="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"></path></svg></a>
+          <a href="https://x.com" target="_blank" title="X"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H21L14.19 10.59 22.24 21H16.16L11.13 14.43 5.5 21H2L9.13 13.01 1.36 3H7.61L12.22 9.03 17.53 3ZM16.37 19H18.09L7.7 5H5.87L16.37 19Z"/></svg></a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:block; margin:auto;">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#14484a"/>
+            <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-7.92a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z" fill="#fff"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>
+          </svg>
+        </a>
+        <a href="mailto:info@donora.org" title="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.015 6.24A2.25 2.25 0 0 1 2.25 3.75h19.5a2.25 2.25 0 0 1 2.235 2.49L12 13.065zm11.985-6.825v11.82a2.25 2.25 0 0 1-2.25 2.25H2.25a2.25 2.25 0 0 1-2.25-2.25V6.24l11.985 6.825L23.985 6.24z"></path></svg></a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 Donora Foundation | All Rights Reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // FAQ Toggle Function
+  function toggleFAQ(element) {
+    const faqItem = element.parentElement;
+    const answer = faqItem.querySelector('.faq-answer');
+    const toggle = element.querySelector('.faq-toggle i');
+    
+    // Close all other FAQs
+    document.querySelectorAll('.faq-item, .faq-card').forEach(item => {
+      if (item !== faqItem) {
+        const question = item.querySelector('.faq-question');
+        const ans = item.querySelector('.faq-answer');
+        const tog = item.querySelector('.faq-toggle i');
+        
+        if (question) question.classList.remove('active');
+        if (ans) ans.classList.remove('active');
+        if (tog) {
+          tog.classList.remove('fa-minus');
+          tog.classList.add('fa-plus');
+        }
+      }
+    });
+    
+    // Toggle current FAQ
+    element.classList.toggle('active');
+    answer.classList.toggle('active');
+    
+    // Handle styling for active state
+    if (element.classList.contains('active')) {
+      element.style.background = 'linear-gradient(135deg, #CFEDEF 0%, #A8D8E0 100%)';
+      element.style.color = '#004E52';
+      if (answer.style) {
+        answer.style.maxHeight = '500px';
+        answer.style.padding = '30px';
+      }
+    } else {
+      element.style.background = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)';
+      element.style.color = '';
+      if (answer.style) {
+        answer.style.maxHeight = '0';
+        answer.style.padding = '0 30px';
+      }
+    }
+    
+    if (toggle) {
+      if (toggle.classList.contains('fa-plus')) {
+        toggle.classList.remove('fa-plus');
+        toggle.classList.add('fa-minus');
+        toggle.parentElement.style.background = '#004E52';
+        toggle.parentElement.style.transform = 'rotate(45deg)';
+      } else {
+        toggle.classList.remove('fa-minus');
+        toggle.classList.add('fa-plus');
+        toggle.parentElement.style.background = '#004E52';
+        toggle.parentElement.style.transform = 'rotate(0deg)';
+      }
+    }
+  }
+
+  // Add toggle functionality to old FAQ cards
+  document.addEventListener('DOMContentLoaded', function() {
+    // Convert old FAQ cards to new format
+    document.querySelectorAll('.faq-card .faq-question').forEach(question => {
+      if (!question.onclick) {
+        question.style.cursor = 'pointer';
+        question.style.display = 'flex';
+        question.style.justifyContent = 'space-between';
+        question.style.alignItems = 'center';
+        question.style.padding = '25px 30px';
+        question.style.background = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)';
+        question.style.borderBottom = '1px solid rgba(226, 232, 240, 0.6)';
+        question.style.transition = 'all 0.3s ease';
+        
+        const questionText = question.textContent;
+        question.innerHTML = '<h3 class="faq-question-text" style="font-size: 1.2rem; font-weight: 600; margin: 0; padding-right: 20px; line-height: 1.4;">' + questionText + '</h3><div class="faq-toggle" style="width: 40px; height: 40px; border-radius: 50%; background: #004E52; color: white; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.3s ease; flex-shrink: 0;"><i class="fas fa-plus"></i></div>';
+        question.onclick = function() { toggleFAQ(this); };
+        
+        const answer = question.nextElementSibling;
+        if (answer && answer.classList.contains('faq-answer')) {
+          answer.style.padding = '0 30px';
+          answer.style.maxHeight = '0';
+          answer.style.overflow = 'hidden';
+          answer.style.transition = 'all 0.4s ease';
+          answer.style.background = 'white';
+          answer.innerHTML = '<div class="faq-answer-content" style="font-size: 1.05rem; line-height: 1.7; color: #475569; padding: 30px 0;">' + answer.innerHTML + '</div>';
+        }
+        
+        // Add hover effect
+        question.addEventListener('mouseenter', function() {
+          if (!this.classList.contains('active')) {
+            this.style.background = 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)';
+          }
+        });
+        
+        question.addEventListener('mouseleave', function() {
+          if (!this.classList.contains('active')) {
+            this.style.background = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)';
+          }
+        });
+      }
+    });
+  });
+
+  // Search Functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('faqSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+          const question = item.querySelector('.faq-question-text').textContent.toLowerCase();
+          const answer = item.querySelector('.faq-answer-content').textContent.toLowerCase();
+          
+          if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    }
+  });
+
+  // Mobile Menu Toggle
+  function toggleMenu() {
+    document.getElementById('nav-menu').classList.toggle('active');
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,721 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Terms of Use – Donora</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    /* --- Professional Terms of Use Styles --- */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      margin-left: auto;
+      text-align: right;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f8fbff 0%, #e8f4f8 100%);
+      font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #1a365d;
+      line-height: 1.6;
+    }
+
+    /* Main Content Container */
+    .terms-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* Professional Title Section */
+    .terms-title-section {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, #2d3748 0%, #1a365d 100%);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terms-title-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .terms-title-section h1 {
+      color: #ffffff;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .terms-subtitle {
+      color: #cbd5e0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Last Updated Badge */
+    .last-updated {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-top: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Content Grid */
+    .terms-content {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    /* Table of Contents */
+    .terms-toc {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .terms-toc h3 {
+      color: #2d3748;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0 0 20px 0;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .terms-toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .terms-toc li {
+      margin-bottom: 12px;
+    }
+
+    .terms-toc a {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: block;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .terms-toc a:hover {
+      background: #f7fafc;
+      color: #2b6cb0;
+      border-left-color: #2b6cb0;
+      transform: translateX(4px);
+    }
+
+    /* Main Content Area */
+    .terms-sections {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    /* Individual Sections */
+    .terms-section {
+      padding: 40px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .terms-section:last-child {
+      border-bottom: none;
+    }
+
+    .terms-section h2 {
+      color: #2d3748;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0 0 24px 0;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #3182ce;
+      position: relative;
+      scroll-margin-top: 120px;
+    }
+
+    .terms-section h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #3182ce, #63b3ed);
+      border-radius: 2px;
+    }
+
+    .terms-section p {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .terms-section ul {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+
+    .terms-section li {
+      margin-bottom: 8px;
+    }
+
+    /* Highlight Boxes */
+    .highlight-box {
+      background: linear-gradient(135deg, #ebf8ff 0%, #f0fff4 100%);
+      border: 1px solid #bee3f8;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border-left: 4px solid #3182ce;
+    }
+
+    .highlight-box h4 {
+      color: #2c5282;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      color: #2d3748;
+    }
+
+    /* Warning Boxes */
+    .warning-box {
+      background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%);
+      border: 1px solid #f6ad55;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border-left: 4px solid #ed8936;
+    }
+
+    .warning-box h4 {
+      color: #c05621;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .warning-box p {
+      margin: 0;
+      color: #2d3748;
+    }
+
+    /* Contact Information */
+    .contact-info {
+      background: #f7fafc;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border: 1px solid #e2e8f0;
+    }
+
+    .contact-info h4 {
+      color: #2d3748;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+    }
+
+    .contact-info a {
+      color: #3182ce;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .terms-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .terms-toc {
+        position: static;
+        order: -1;
+      }
+
+      .terms-toc ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .terms-toc li {
+        margin-bottom: 0;
+      }
+
+      .terms-toc a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .terms-main {
+        padding: 20px 16px 40px;
+      }
+
+      .terms-title-section {
+        padding: 40px 24px;
+        margin-bottom: 40px;
+      }
+
+      .terms-title-section h1 {
+        font-size: 2.5rem;
+      }
+
+      .terms-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .terms-section {
+        padding: 24px;
+      }
+
+      .terms-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .terms-section p,
+      .terms-section ul {
+        font-size: 1rem;
+      }
+
+      .terms-toc {
+        padding: 20px;
+      }
+
+      .terms-toc h3 {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .terms-title-section h1 {
+        font-size: 2rem;
+      }
+
+      .terms-section {
+        padding: 20px;
+      }
+
+      .highlight-box,
+      .warning-box,
+      .contact-info {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+        <div style="overflow: hidden;">
+            <header class="site-header">
+              {% include 'header.html' %}
+            </header>
+
+
+
+<main class="terms-main">
+  <!-- Title Section -->
+  <section class="terms-title-section">
+    <h1>Terms of Use</h1>
+    <p class="terms-subtitle">Legal terms and conditions governing your use of Donora services</p>
+    <div class="last-updated">Last updated: July 2025</div>
+  </section>
+
+  <!-- Content Grid -->
+  <div class="terms-content">
+    <!-- Table of Contents -->
+    <aside class="terms-toc">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#welcome">Welcome</a></li>
+        <li><a href="#eligibility">Eligibility Requirements</a></li>
+        <li><a href="#responsibilities">User Responsibilities</a></li>
+        <li><a href="#free-service">Free Service Agreement</a></li>
+        <li><a href="#intellectual-property">Intellectual Property</a></li>
+        <li><a href="#liability">Limitation of Liability</a></li>
+        <li><a href="#termination">Account Termination</a></li>
+        <li><a href="#governing-law">Governing Law</a></li>
+        <li><a href="#medical-disclaimer">Medical Disclaimer</a></li>
+        <li><a href="#contact">Contact Information</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="terms-sections">
+      <!-- Welcome -->
+      <section  class="terms-section">
+        <h2 id="welcome">Welcome to Donora</h2>
+        <p>Welcome to Donora.ngo, a life-saving platform dedicated to facilitating organ donation and transplantation. By accessing or using this platform, you acknowledge that you have read, understood, and agree to be bound by the following terms and conditions which govern your use of our services.</p>
+        
+        <div class="highlight-box">
+          <h4>Agreement to Terms</h4>
+          <p>Your continued use of Donora constitutes acceptance of these terms. If you do not agree with any part of these terms, please discontinue use of our services immediately.</p>
+        </div>
+
+        <p>These terms apply to all users, including donors, recipients, healthcare professionals, and visitors to our platform. We reserve the right to update these terms at any time, with notice provided through your dashboard.</p>
+      </section>
+
+      <!-- Eligibility -->
+      <section class="terms-section">
+        <h2 id="eligibility" >Eligibility Requirements</h2>
+        <p>To ensure the safety and legal compliance of our organ donation services, all users must meet specific eligibility criteria.</p>
+        
+        <h4>For Donors:</h4>
+        <ul>
+          <li>Must be at least 18 years of age</li>
+          <li>Must be medically fit as determined by our partner hospital</li>
+          <li>Must provide valid government-issued identification</li>
+          <li>Must pass comprehensive medical and psychological evaluations</li>
+          <li>Must not have any disqualifying medical conditions</li>
+        </ul>
+
+        <h4>For Recipients:</h4>
+        <ul>
+          <li>Must be legally eligible to receive organ transplants</li>
+          <li>Must have medical documentation supporting the need for transplantation</li>
+          <li>Must be under the care of a qualified medical professional</li>
+          <li>Must comply with all medical requirements and follow-up care</li>
+        </ul>
+
+        <div class="warning-box">
+          <h4>Important Notice</h4>
+          <p>Providing false information about your eligibility may result in immediate removal from our platform and could have legal consequences.</p>
+        </div>
+      </section>
+
+      <!-- User Responsibilities -->
+      <section  class="terms-section">
+        <h2 id="responsibilities">User Responsibilities</h2>
+        <p>As a user of Donora, you have important responsibilities that ensure the safety, integrity, and effectiveness of our life-saving services.</p>
+        
+        <h4>Information Accuracy:</h4>
+        <ul>
+          <li>Provide complete, accurate, and truthful information at all times</li>
+          <li>Update your profile immediately when circumstances change</li>
+          <li>Report any errors or discrepancies in your medical records</li>
+          <li>Maintain current contact information for emergency situations</li>
+        </ul>
+
+        <h4>Medical Compliance:</h4>
+        <ul>
+          <li>Consent to all required medical procedures through SaveLife Hospital</li>
+          <li>Follow all pre-operative and post-operative instructions</li>
+          <li>Attend all scheduled appointments and medical evaluations</li>
+          <li>Disclose all relevant medical history and current medications</li>
+        </ul>
+
+        <div class="warning-box">
+          <h4>Consequences of Non-Compliance</h4>
+          <p>Misrepresentation, falsification of information, or failure to comply with medical requirements may lead to immediate removal from Donora and potential legal action.</p>
+        </div>
+      </section>
+
+      <!-- Free Service Agreement -->
+      <section class="terms-section">
+        <h2 id="free-service" >Free Service Agreement</h2>
+        <p>Donora is committed to providing all services completely free of charge to ensure equal access to life-saving organ transplantation regardless of economic status.</p>
+        
+        <h4>Services Provided at No Cost:</h4>
+        <ul>
+          <li>Platform registration and account management</li>
+          <li>Medical compatibility testing and evaluation</li>
+          <li>Surgery coordination and scheduling</li>
+          <li>Pre-operative and post-operative care coordination</li>
+          <li>Administrative support and case management</li>
+        </ul>
+
+        <div class="highlight-box">
+          <h4>No Payment Policy</h4>
+          <p>Donora and its hospital partner do not accept any payments, tips, or compensation from users. Any attempt to offer payment may result in account termination.</p>
+        </div>
+
+        <p>This commitment ensures that organ donation remains a purely altruistic act and prevents any commercialization of human organs, in compliance with Indian law and international ethical standards.</p>
+      </section>
+
+      <!-- Intellectual Property -->
+      <section  class="terms-section">
+        <h2 id="intellectual-property">Intellectual Property Rights</h2>
+        <p>All intellectual property on the Donora platform is protected by applicable copyright, trademark, and other intellectual property laws.</p>
+        
+        <h4>Protected Content Includes:</h4>
+        <ul>
+          <li>Donora logo, branding, and visual identity</li>
+          <li>Website design, layout, and user interface</li>
+          <li>Software, algorithms, and technical systems</li>
+          <li>Educational content, articles, and resources</li>
+          <li>Database structure and organization</li>
+        </ul>
+
+        <div class="warning-box">
+          <h4>Prohibited Activities</h4>
+          <p>Unauthorized copying, reproduction, distribution, or commercial use of any Donora content is strictly prohibited and may result in legal action.</p>
+        </div>
+
+        <p>Users may access and use the platform for its intended purpose but may not reproduce, modify, or distribute any content without explicit written permission from Donora Foundation.</p>
+      </section>
+
+      <!-- Limitation of Liability -->
+      <section  class="terms-section">
+        <h2 id="liability">Limitation of Liability</h2>
+        <p>While Donora facilitates organ donation and transplantation services, it's important to understand the scope of our responsibilities and limitations.</p>
+        
+        <h4>Donora's Role:</h4>
+        <ul>
+          <li>Facilitate connections between donors and recipients</li>
+          <li>Coordinate administrative processes and scheduling</li>
+          <li>Provide platform technology and support services</li>
+          <li>Ensure compliance with legal and ethical standards</li>
+        </ul>
+
+        <h4>Medical Responsibility:</h4>
+        <p>All medical procedures, surgical operations, and clinical decisions are the sole responsibility of SaveLife Hospital and its licensed medical professionals. Donora does not provide medical services or make medical decisions.</p>
+
+        <div class="warning-box">
+          <h4>Important Medical Disclaimer</h4>
+          <p>Donora is not responsible for medical outcomes, complications, or adverse events related to organ transplantation procedures. All medical risks are managed by qualified healthcare professionals at our partner hospital.</p>
+        </div>
+      </section>
+
+      <!-- Termination -->
+      <section class="terms-section">
+        <h2 id="termination" >Account Termination</h2>
+        <p>Donora reserves the right to suspend or terminate user accounts to maintain the integrity and safety of our platform.</p>
+        
+        <h4>Grounds for Termination:</h4>
+        <ul>
+          <li>Violation of these terms and conditions</li>
+          <li>Providing false or misleading information</li>
+          <li>Fraudulent behavior or misrepresentation</li>
+          <li>Failure to comply with medical requirements</li>
+          <li>Engaging in activities that compromise platform security</li>
+          <li>Attempting to commercialize organ donation</li>
+        </ul>
+
+        <h4>Termination Process:</h4>
+        <p>Users will be notified of account termination via dashboard notification. In cases of serious violations, immediate termination may occur without prior notice.</p>
+
+        <div class="highlight-box">
+          <h4>Appeal Process</h4>
+          <p>Users may appeal termination decisions by contacting our support team within 30 days. All appeals will be reviewed fairly and promptly.</p>
+        </div>
+      </section>
+
+      <!-- Governing Law -->
+      <section  class="terms-section">
+        <h2 id="governing-law">Governing Law and Jurisdiction</h2>
+        <p>These terms of use are governed by the laws of India and are subject to the jurisdiction of courts in Pune, Maharashtra.</p>
+        
+        <h4>Applicable Laws:</h4>
+        <ul>
+          <li>Indian Constitution and fundamental rights</li>
+          <li>Transplantation of Human Organs Act, 1994</li>
+          <li>Information Technology Act, 2000</li>
+          <li>Indian Medical Council regulations</li>
+          <li>Consumer Protection Act, 2019</li>
+        </ul>
+
+        <h4>Dispute Resolution:</h4>
+        <p>Any disputes arising from the use of Donora services will be resolved through the following process:</p>
+        <ul>
+          <li>Initial attempt at amicable resolution through direct communication</li>
+          <li>Mediation through recognized dispute resolution services</li>
+          <li>Final resolution through courts in Pune, Maharashtra jurisdiction</li>
+        </ul>
+      </section>
+
+      <!-- Medical Disclaimer -->
+      <section  class="terms-section">
+        <h2 id="medical-disclaimer">Medical Disclaimer</h2>
+        <p>Donora is a technology platform that facilitates organ donation coordination. We do not provide medical advice, diagnosis, or treatment.</p>
+        
+        <div class="warning-box">
+          <h4>Important Medical Notice</h4>
+          <p>All medical procedures, evaluations, and treatments are conducted exclusively by licensed healthcare professionals at SaveLife Hospital.</p>
+        </div>
+
+        <h4>Medical Responsibilities:</h4>
+        <ul>
+          <li>All surgical procedures are performed by qualified surgeons</li>
+          <li>Medical decisions are made by licensed healthcare professionals</li>
+          <li>Patient care follows established medical protocols and standards</li>
+          <li>Emergency medical care is provided by hospital emergency services</li>
+        </ul>
+
+        <p>Users should always consult with qualified healthcare professionals for medical advice and should not rely on Donora for medical guidance or decision-making.</p>
+      </section>
+
+      <!-- Contact Information -->
+      <section  class="terms-section">
+        <h2 id="contact">Contact Information</h2>
+        <p>If you have questions about these terms of use or need assistance with any aspect of our services, please contact us using the information below.</p>
+        
+        <div class="contact-info">
+          <h4>Legal and Terms Inquiries</h4>
+          <p><strong>Email:</strong> <a href="mailto:info@donora.ngo">info@donora.ngo</a></p>
+          <p><strong>Phone:</strong> +91 123 456 7890</p>
+          <p><strong>Address:</strong> 123 Donora Lane, Pune, Maharashtra, India</p>
+        </div>
+
+        <p>We are committed to addressing your concerns promptly and transparently. Your understanding and compliance with these terms help us maintain a safe, effective platform for saving lives through organ donation.</p>
+
+        <div class="highlight-box">
+          <h4>Emergency Contact</h4>
+          <p>For medical emergencies, contact SaveLife Hospital directly or call emergency services (108). Donora support is not equipped to handle medical emergencies.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-about">
+      <img src="{% static 'images/removed.png' %}" alt="Logo">
+      <p>Donora is dedicated to saving lives through living organ donation awareness, kindness, and collective action. Together, we give the gift of life.</p>
+    </div>
+    <div class="footer-nav-blocks">
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+          <li><a href="{% url 'contactus' %}">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-get-involved">
+        <h4>Get Involved</h4>
+        <ul>
+         <li><a href="{% url 'signup' %}">Become a Donor</a></li>
+          <li><a href="{% url 'signup' %}">Become a Recipient</a></li>
+        </ul>
+      </div>
+      <div class="footer-terms">
+        <h4>Terms & Conditions</h4>
+        <ul>
+          <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+          <li><a href="{% url 'terms_of_use' %}">Terms of Use</a></li>
+          <li><a href="{% url 'security' %}">Security</a></li>
+          <li><a href="{% url 'other_policies' %}">Other Policies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+       <p> <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;">123 Donora Lane, Pune, India</a></p>
+      <p>info@donora.ngo</p>
+      <p>+91 123 456 7890</p>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <div class="social-heading">
+        <hr class="line">
+        <span>Connect With Us</span>
+        <hr class="line">
+      </div>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" title="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"></path></svg></a>
+        <a href="https://x.com" target="_blank" title="X"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H21L14.19 10.59 22.24 21H16.16L11.13 14.43 5.5 21H2L9.13 13.01 1.36 3H7.61L12.22 9.03 17.53 3ZM16.37 19H18.09L7.7 5H5.87L16.37 19Z"/></svg></a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:block; margin:auto;">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#14484a"/>
+            <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-7.92a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z" fill="#fff"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>
+          </svg>
+        </a>
+        <a href="mailto:info@donora.org" title="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.015 6.24A2.25 2.25 0 0 1 2.25 3.75h19.5a2.25 2.25 0 0 1 2.235 2.49L12 13.065zm11.985-6.825v11.82a2.25 2.25 0 0 1-2.25 2.25H2.25a2.25 2.25 0 0 1-2.25-2.25V6.24l11.985 6.825L23.985 6.24z"></path></svg></a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 Donora Foundation | All Rights Reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('nav-menu').classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>

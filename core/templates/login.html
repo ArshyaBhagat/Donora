@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login – Donora</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .left {
+      width: 50%;
+      background-color: #EAF4FF;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .left .logo img {
+      width: 170px;
+    }
+
+    .left .welcome h1 {
+      font-size: 32px;
+      color: #1A237E;
+      margin-bottom: 20px;
+    }
+
+    .left .welcome p {
+      font-size: 18px;
+      color: #2A70B8;
+    }
+
+    .left .plant {
+      width: 300px;
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+
+    .right {
+      width: 50%;
+      background-color: #EAF4FF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .form-box {
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(135deg, #1A237E, #2A70B8);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-box img {
+      width: 100px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+    }
+
+    .form-box h2 {
+      color: #ffffff;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .form-box label {
+      color: #ffffff;
+      font-weight: 600;
+      margin-bottom: 6px;
+      align-self: flex-start;
+      font-size: 14px;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 18px;
+      border-radius: 60px;
+      border: 1px solid #90A4AE;
+    }
+
+    .form-box input[type="submit"] {
+      background-color: #43A047;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .form-box input[type="submit"]:hover {
+      background-color: #388E3C;
+    }
+
+    .message {
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .message.error {
+      color: red;
+    }
+
+    .message.success {
+      color: lightgreen;
+    }
+
+    .change-password-link {
+      margin-top: 10px;
+    }
+
+    .change-password-link a {
+      color: #ffffff;
+      font-size: 14px;
+      text-decoration: underline;
+    }
+
+
+    /* Media Queries */
+    @media screen and (max-width: 992px) {
+      .left .plant {
+        width: 250px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left, .right {
+        width: 100%;
+        height: auto;
+        padding: 2rem;
+      }
+
+      .left .logo img {
+        width: 140px;
+      }
+
+      .left .plant {
+        width: 200px;
+      }
+
+      .form-box {
+        width: 100%;
+        padding: 20px;
+      }
+
+      .form-box h2 {
+        font-size: 20px;
+      }
+
+      .form-box input[type="submit"] {
+        font-size: 14px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .left .welcome h1 {
+        font-size: 24px;
+      }
+
+      .left .welcome p {
+        font-size: 16px;
+      }
+
+      .form-box h2 {
+        font-size: 18px;
+      }
+
+      .form-box input {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- LEFT PANEL -->
+    <div class="left">
+      <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Logo">
+      </div>
+      <br>
+      <div class="welcome">
+        <h1>Welcome Back!</h1>
+        <p>Log in to continue using Donora. We're helping lives connect through organ donation and care.</p>
+      </div>
+      <img src="{% static 'images/plant.jpg' %}" class="plant" alt="Plant">
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right">
+      <div class="form-box">
+        <img src="{% static 'images/Login.png' %}" id="login-img" alt="Login Image">
+        <h2>Login</h2>
+
+        {% if messages %}
+          {% for message in messages %}
+            <div class="message {% if 'error' in message.tags %}error{% elif 'success' in message.tags %}success{% endif %}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        <form name="loginForm" method="post" onsubmit="return handleLoginValidation()">
+          {% csrf_token %}
+
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" placeholder="Enter Name">
+
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Enter Password">
+
+          <div class="message error" id="error-msg"></div>
+
+          <input type="submit" value="Login">
+
+          <div class="change-password-link">
+            <a href="{% url 'forgot_password' %}">Forgot Password?</a> <br><br>
+           <p style="color: #ffffff; font-size: 14px;">
+  Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+</p> 
+           </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ JavaScript Validation -->
+  <script>
+    function handleLoginValidation() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const err = document.getElementById("error-msg");
+
+      if (!username || !password) {
+        err.innerText = "Both Username and Password are required!";
+        return false;
+      }
+
+      err.innerText = "";
+      return true;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Contact Us</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    /* === Base === */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .header-left { display: flex; align-items: center; }
+    nav {
+      margin-left: auto;
+      text-align: right;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f8fbff 0%, #e8f4f8 100%);
+      font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #1a365d;
+      line-height: 1.6;
+    }
+
+    .contact-container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .contact-container h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2a7a65;
+    }
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .contact-form, .contact-info { flex: 1 1 45%; }
+    .contact-form form { display: flex; flex-direction: column; }
+    .contact-form label {
+      margin-bottom: 8px; color: #444; font-weight: bold;
+    }
+    .contact-form input, .contact-form textarea {
+      margin-bottom: 12px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .field-error { color: #c0392b; font-size: 0.9rem; margin: 4px 0 12px; }
+    .messages { margin-bottom: 16px; }
+    .messages p { margin: 0 0 10px; padding: 10px 12px; border-radius: 8px; }
+    .messages .success { background: #e6fffa; color: #0f766e; border: 1px solid #99f6e4; }
+    .messages .error { background: #fdecea; color: #b3261e; border: 1px solid #f5c2c7; }
+
+    .contact-form button {
+      padding: 12px;
+      background: #2a7a65;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .contact-form button:hover { background: #245f52; }
+
+    .contact-info h2 { color: #2a7a65; margin-bottom: 15px; }
+    .contact-info p { margin: 10px 0; color: #555; }
+
+    .contact-section {
+      background-color: #f0f8f5;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .contact-section h2 {
+      font-size: 32px;
+      color: #2a7a65;
+      margin-bottom: 20px;
+    }
+    .contact-section .container { max-width: 900px; margin: auto; }
+    .contact-section iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hospital Section */
+    .hospital-section {
+      margin: 40px auto;
+      padding: 20px;
+      max-width: 1000px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .hospital-section h2 { color: #00695c; margin-bottom: 15px; }
+    .hospital-section p { font-size: 16px; margin-bottom: 15px; }
+    .map-container { margin: 20px 0; }
+    .map-link {
+      display: inline-block; margin-top: 10px; font-weight: bold; color: #00695c; text-decoration: none;
+    }
+    .map-link:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact-wrapper { flex-direction: column; }
+    }
+
+    {% comment %} /* Footer (basic layout support if not in site CSS) */
+    .footer-top { display: grid; gap: 20px; max-width: 1100px; margin: 0 auto; padding: 20px; }
+    @media (min-width: 900px) {
+      .footer-top { grid-template-columns: 1.2fr 2fr 1fr; }
+      .footer-nav-blocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    }
+    .footer-divider { border: none; border-top: 1px solid #e0e0e0; margin: 0; }
+    .footer-bottom { display: flex; flex-direction: column; gap: 12px; align-items: center; padding: 16px; }
+    .social-heading { display: flex; align-items: center; gap: 10px; }
+    .social-heading .line { width: 60px; border: none; border-top: 1px solid #ccc; }
+    .social-icons a { margin: 0 8px; color: #14484a; }
+    .footer-copy p { color: #666; font-size: 14px; margin: 0; } {% endcomment %}
+  </style>
+</head>
+<body>
+  <div style="overflow: hidden;">
+    <header class="site-header">
+      {% include 'header.html' %}
+    </header>
+
+    <br><br><br>
+
+    <div class="contact-container">
+      <h1>Contact Us</h1>
+
+      <div class="contact-wrapper">
+        <!-- Contact Form -->
+        <div class="contact-form">
+          <form method="post" action="{% url 'contactus' %}">
+            {% csrf_token %}
+
+            {% if messages %}
+              <div class="messages">
+                {% for message in messages %}
+                  <p class="{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if form.non_field_errors %}
+              <div class="field-error">{{ form.non_field_errors|join:', ' }}</div>
+            {% endif %}
+
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value="{{ form.name.value|default_if_none:'' }}"
+              required
+            />
+            {% if form.name.errors %}
+              <div class="field-error">{{ form.name.errors.0 }}</div>
+            {% endif %}
+
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value="{{ form.email.value|default_if_none:'' }}"
+              required
+            />
+            {% if form.email.errors %}
+              <div class="field-error">{{ form.email.errors.0 }}</div>
+            {% endif %}
+
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+            >{{ form.message.value|default_if_none:'' }}</textarea>
+            {% if form.message.errors %}
+              <div class="field-error">{{ form.message.errors.0 }}</div>
+            {% endif %}
+
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <h2>Get in Touch</h2>
+          <p>Email: info@donora.org</p>
+          <p>Phone: +91 123 456 7890</p>
+          <p>Address: 123 Donora Lane, Pune, India</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donora Address Section -->
+    <section class="hospital-section">
+      <h2>Donora Address</h2>
+      <p><strong>Donora Office:</strong> !!The Soul Of Giving!!</p>
+
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.327344605407!2d73.856743!3d18.520430!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c06c9e8b79b5%3A0xabc!2sSave%20Life%20Hospital!5e0!3m2!1sen!2sin!4v1626348912345!5m2!1sen!2sin"
+          width="100%"
+          height="300"
+          style="border:0; border-radius: 8px;"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <p>
+        <a href="https://www.google.com/maps/dir//Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004/@18.5129901,73.756941,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bc2bf89a5c2551f:0xe5a1afe1c6049f8b!2m2!1d73.8393427!2d18.5130079?entry=ttu&g_ep=EgoyMDI1MDgxMy4wIKXMDSoASAFQAw%3D%3D"
+           target="_blank" class="map-link">
+          📍 View Donora Office on Google Maps
+        </a>
+      </p>
+    </section>
+
+    <!-- Tie-up Hospital Section -->
+    <section class="hospital-section">
+      <h2>Our Tie-up Hospital</h2>
+      <p><strong>Save Life Hospital</strong> – Our trusted partner, working with us to save lives through organ donation and transplantation.</p>
+
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.327344605407!2d73.856743!3d18.520430!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c06c9e8b79b5%3A0xabc!2sSave%20Life%20Hospital!5e0!3m2!1sen!2sin!4v1626348912345!5m2!1sen!2sin"
+          width="100%"
+          height="300"
+          style="border:0; border-radius: 8px;"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <p>
+        <a href="https://www.google.com/maps/dir//Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004/@18.5129901,73.756941,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bc2bf89a5c2551f:0xe5a1afe1c6049f8b!2m2!1d73.8393427!2d18.5130079?entry=ttu&g_ep=EgoyMDI1MDgxMy4wIKXMDSoASAFQAw%3D%3D"
+           target="_blank" class="map-link">
+          📍 View Save Life Hospital on Google Maps
+        </a>
+      </p>
+    </section>
+
+    <br><br>
+
+             <footer>
+              <div class="footer-top">
+                <div class="footer-about">
+                  <img src="{% static 'images/removed.png' %}" alt="Logo">
+                  <p>Donora is dedicated to saving lives through living organ donation awareness, kindness, and collective action. Together, we give the gift of life.</p>
+                </div>
+                <div class="footer-nav-blocks">
+                  <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                      <li><a href="{% url 'aboutus' %}">About Us</a></li>
+                      <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+                      <li><a href="{% url 'contactus' %}">Contact</a></li>
+                    </ul>
+                  </div>
+                  <div class="footer-get-involved">
+                    <h4>Get Involved</h4>
+                    <ul>
+                      <li><a href="{% url 'signup' %}">Become a Donor</a></li>
+                      <li><a href="{% url 'signup' %}">Become a Recipient</a></li>
+                    </ul>
+                  </div>
+                  <div class="footer-terms">
+                    <h4>Terms & Conditions</h4>
+                    <ul>
+                      <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+                      <li><a href="{% url 'terms_of_use' %}">Terms of Use</a></li>
+                      <li><a href="{% url 'security' %}">Security</a></li>
+                      <li><a href="{% url 'other_policies' %}">Other Policies</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="footer-contact">
+                  <h4>Contact Us</h4>
+                  <p> <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;">123 Donora Lane, Pune, India</a></p>
+                  <p>info@donora.ngo</p>
+                  <p>+91 123 456 7890</p>
+                </div>
+              </div>
+              <hr class="footer-divider">
+              <div class="footer-bottom">
+                <div class="footer-social">
+                  <div class="social-heading">
+                    <hr class="line">
+                    <span>Connect With Us</span>
+                    <hr class="line">
+                  </div>
+                  <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank" title="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"></path></svg></a>
+                    <a href="https://x.com" target="_blank" title="X"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H21L14.19 10.59 22.24 21H16.16L11.13 14.43 5.5 21H2L9.13 13.01 1.36 3H7.61L12.22 9.03 17.53 3ZM16.37 19H18.09L7.7 5H5.87L16.37 19Z"/></svg></a>
+                    <a href="https://instagram.com" target="_blank" title="Instagram">
+                      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:block; margin:auto;">
+                        <rect x="2" y="2" width="20" height="20" rx="5" fill="#14484a"/>
+                        <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-7.92a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z" fill="#fff"/>
+                        <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>
+                      </svg>
+                    </a>
+                    <a href="mailto:info@donora.org" title="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.015 6.24A2.25 2.25 0 0 1 2.25 3.75h19.5a2.25 2.25 0 0 1 2.235 2.49L12 13.065zm11.985-6.825v11.82a2.25 2.25 0 0 1-2.25 2.25H2.25a2.25 2.25 0 0 1-2.25-2.25V6.24l11.985 6.825L23.985 6.24z"></path></svg></a>
+                  </div>
+                </div>
+                <div class="footer-copy">
+                  <p>&copy; 2025 Donora Foundation | All Rights Reserved</p>
+                </div>
+              </div>
+            </footer>
+            
+            <script>
+              function toggleMenu() {
+                document.getElementById('nav-menu').classList.toggle('active');
+              }
+            </script>
+          
+          </body>
+          </html>

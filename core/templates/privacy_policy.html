@@ -1,0 +1,615 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Privacy Policy – Donora</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    /* --- Professional Privacy Policy Styles --- */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      margin-left: auto;
+      text-align: right;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f8fbff 0%, #e8f4f8 100%);
+      font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #1a365d;
+      line-height: 1.6;
+    }
+
+    /* Main Content Container */
+    .privacy-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* Professional Title Section */
+    .policy-title-section {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, #2d3748 0%, #1a365d 100%);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .policy-title-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .policy-title-section h1 {
+      color: #ffffff;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .policy-subtitle {
+      color: #cbd5e0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Last Updated Badge */
+    .last-updated {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-top: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Content Grid */
+    .policy-content {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    /* Table of Contents */
+    .policy-toc {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .policy-toc h3 {
+      color: #2d3748;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0 0 20px 0;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .policy-toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .policy-toc li {
+      margin-bottom: 12px;
+    }
+
+    .policy-toc a {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: block;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .policy-toc a:hover {
+      background: #f7fafc;
+      color: #2b6cb0;
+      border-left-color: #2b6cb0;
+      transform: translateX(4px);
+    }
+
+    /* Main Content Area */
+    .policy-sections {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    /* Individual Sections */
+    .policy-section {
+      padding: 40px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .policy-section:last-child {
+      border-bottom: none;
+    }
+
+    .policy-section h2 {
+      color: #2d3748;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0 0 24px 0;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #3182ce;
+      position: relative;
+    }
+
+    .policy-section h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #3182ce, #63b3ed);
+      border-radius: 2px;
+    }
+
+    .policy-section p {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .policy-section ul {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+
+    .policy-section li {
+      margin-bottom: 8px;
+    }
+
+    /* Highlight Boxes */
+    .highlight-box {
+      background: linear-gradient(135deg, #ebf8ff 0%, #f0fff4 100%);
+      border: 1px solid #bee3f8;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border-left: 4px solid #3182ce;
+    }
+
+    .highlight-box h4 {
+      color: #2c5282;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      color: #2d3748;
+    }
+
+    /* Contact Information */
+    .contact-info {
+      background: #f7fafc;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border: 1px solid #e2e8f0;
+    }
+
+    .contact-info h4 {
+      color: #2d3748;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+    }
+
+    .contact-info a {
+      color: #3182ce;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .policy-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .policy-toc {
+        position: static;
+        order: -1;
+      }
+
+      .policy-toc ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .policy-toc li {
+        margin-bottom: 0;
+      }
+
+      .policy-toc a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .privacy-main {
+        padding: 20px 16px 40px;
+      }
+
+      .policy-title-section {
+        padding: 40px 24px;
+        margin-bottom: 40px;
+      }
+
+      .policy-title-section h1 {
+        font-size: 2.5rem;
+      }
+
+      .policy-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .policy-section {
+        padding: 24px;
+      }
+
+      .policy-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .policy-section p,
+      .policy-section ul {
+        font-size: 1rem;
+      }
+
+      .policy-toc {
+        padding: 20px;
+      }
+
+      .policy-toc h3 {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .policy-title-section h1 {
+        font-size: 2rem;
+      }
+
+      .policy-section {
+        padding: 20px;
+      }
+
+      .highlight-box,
+      .contact-info {
+        padding: 16px;
+      }
+    }
+
+    /* Smooth scrolling and proper anchor positioning */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .policy-section {
+      scroll-margin-top: 20px;
+    }
+
+    /* Ensure section titles are visible when navigating */
+    .policy-section h2 {
+      scroll-margin-top: 120px;
+    }
+  </style>
+</head>
+
+  <body>
+        <div style="overflow: hidden;">
+            <header class="site-header">
+              {% include 'header.html' %}
+            </header>
+
+<main class="privacy-main">
+  <!-- Title Section -->
+  <section class="policy-title-section">
+    <h1>Privacy Policy</h1>
+    <p class="policy-subtitle">Your privacy and data security are our highest priorities</p>
+    <div class="last-updated">Last updated: July 2025</div>
+  </section>
+
+  <!-- Content Grid -->
+  <div class="policy-content">
+    <!-- Table of Contents -->
+    <aside class="policy-toc">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#commitment">Our Commitment</a></li>
+        <li><a href="#collection">Information Collection</a></li>
+        <li><a href="#usage">Use of Information</a></li>
+        <li><a href="#security">Data Security</a></li>
+        <li><a href="#access">Access & Control</a></li>
+        <li><a href="#compliance">Legal Compliance</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="policy-sections">
+      <!-- Our Commitment -->
+
+
+      <section  class="policy-section">
+        
+        <h2 id="commitment">Our Commitment to Your Privacy</h2>
+        <p>At Donora, safeguarding your privacy is a foundational commitment that guides every aspect of our operations. This Privacy Policy comprehensively outlines how we collect, use, protect, and disclose the personal and medical information you provide as a donor or recipient.</p>
+        
+        <div class="highlight-box">
+          <h4>Free Service Guarantee</h4>
+          <p>All our services are provided entirely free of cost. We never monetize your personal or medical data in any way.</p>
+        </div>
+
+        <p>Donora may periodically update this policy to reflect changes in our practices or legal requirements. Users will be promptly alerted via their dashboard when substantive changes occur, ensuring complete transparency.</p>
+      </section>
+
+      <!-- Information Collection -->
+      <section  class="policy-section">
+        <h2 id="collection">Information Collection</h2>
+        <p>We collect various types of information to provide you with the best possible service while maintaining the highest standards of medical compatibility and safety.</p>
+        
+        <h4>Types of Information We Collect:</h4>
+        <ul>
+          <li><strong>Personal Identification:</strong> Name, contact details, address, and identification documents</li>
+          <li><strong>Demographic Information:</strong> Age, gender, location, and relevant lifestyle factors</li>
+          <li><strong>Medical Data:</strong> Blood type, current health status, and compatibility factors</li>
+         
+        </ul>
+
+        <div class="highlight-box">
+          <h4>Data Collection Methods</h4>
+          <p>All information is collected through secure, structured forms with your explicit consent. We never collect data without your knowledge or permission.</p>
+        </div>
+
+        <p>All data is securely stored and transmitted exclusively via encrypted methods, ensuring your information remains protected at all times.</p>
+      </section>
+
+      <!-- Use of Information -->
+      <section  class="policy-section">
+        <h2 id="usage">Use of Information</h2>
+        <p>Your information is used solely for legitimate medical and administrative purposes related to organ donation and transplantation services.</p>
+        
+        <h4>Primary Uses:</h4>
+        <ul>
+          <li>Facilitate accurate medical compatibility matching between donors and recipients</li>
+          <li>Ensure compliance with healthcare regulations and legal requirements</li>
+          <li>Provide timely notifications and updates via your personal dashboard</li>
+          <li>Maintain comprehensive medical records for safety and legal compliance</li>
+          <li>Communicate important information about the donation process</li>
+        </ul>
+
+        <div class="highlight-box">
+          <h4>Data Protection Promise</h4>
+          <p>We do not sell, rent, lease, or otherwise monetize any personal or medical data. Your information is never shared with third parties for commercial purposes.</p>
+        </div>
+      </section>
+
+      <!-- Data Security -->
+      <section class="policy-section">
+        <h2 id="security">Data Security</h2>
+        <p>We implement comprehensive, industry-standard security protocols to protect your sensitive information from unauthorized access, disclosure, or misuse.</p>
+        
+        <h4>Security Measures:</h4>
+        <ul>
+          <li>Advanced encryption for all data transmission and storage</li>
+          <li>Secure server configurations with regular security updates</li>
+          <li>Restricted database access with multi-factor authentication</li>
+          <li>Regular security audits and vulnerability assessments</li>
+          <li>Staff training on data protection and privacy protocols</li>
+        </ul>
+
+        <p>Our hospital partner complies with all applicable healthcare data privacy regulations, including relevant Indian healthcare laws and international standards where applicable.</p>
+      </section>
+
+      <!-- Access & Control -->
+      <section  class="policy-section">
+        <h2 id="access">Access & Control</h2>
+        <p>You maintain complete control over your personal information and can access, modify, or delete your data at any time.</p>
+        
+        <h4>Your Rights:</h4>
+        <ul>
+          <li>Access and review all your stored information</li>
+          <li>Update or correct any inaccurate data</li>
+          <li>Request temporary suspension of your account</li>
+          <li>Request complete account deletion and data removal</li>
+        </ul>
+
+        <div class="contact-info">
+          <h4>Data Requests</h4>
+          <p>To request account deletion, data removal, or any other data-related inquiries, please contact us at:</p>
+          <p><a href="mailto:info@donora.ngo">info@donora.ngo</a></p>
+          <p>We will respond to all requests within 48 hours and complete most actions within 7 business days.</p>
+        </div>
+      </section>
+
+      <!-- Legal Compliance -->
+      <section  class="policy-section">
+        <h2 id="compliance" >Legal Compliance</h2>
+        <p>We strictly adhere to all relevant Indian privacy laws, healthcare regulations, and international standards for medical data protection.</p>
+        
+        <h4>Regulatory Compliance:</h4>
+        <ul>
+          <li>Indian Information Technology Act and Rules</li>
+          <li>Healthcare data protection regulations</li>
+          <li>Medical ethics and patient confidentiality standards</li>
+          <li>Organ transplantation legal requirements</li>
+        </ul>
+
+        <div class="highlight-box">
+          <h4>Legal Disclosure</h4>
+          <p>In rare circumstances involving legal inquiries, data may be disclosed only as required by valid law enforcement requests or court orders. We will notify affected users whenever legally permissible.</p>
+        </div>
+      </section>
+
+      <!-- Contact Information -->
+      <section class="policy-section">
+        <h2 id="contact">Contact Us</h2>
+        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please don't hesitate to contact us.</p>
+        
+        <div class="contact-info">
+          <h4>Privacy Officer</h4>
+          <p><strong>Email:</strong> <a href="mailto:info@donora.ngo">info@donora.ngo</a></p>
+          <p><strong>Phone:</strong> +91 123 456 7890</p>
+          <p><strong>Address:</strong> 123 Donora Lane, Pune, India</p>
+        </div>
+
+        <p>We are committed to addressing your privacy concerns promptly and transparently. Your trust is essential to our mission of saving lives through organ donation.</p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-about">
+      <img src="{% static 'images/removed.png' %}" alt="Logo">
+      <p>Donora is dedicated to saving lives through living organ donation awareness, kindness, and collective action. Together, we give the gift of life.</p>
+    </div>
+    <div class="footer-nav-blocks">
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+          <li><a href="{% url 'contactus' %}">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-get-involved">
+        <h4>Get Involved</h4>
+        <ul>
+           <li><a href="{% url 'signup' %}">Become a Donor</a></li>
+          <li><a href="{% url 'signup' %}">Become a Recipient</a></li>
+        </ul>
+      </div>
+      <div class="footer-terms">
+        <h4>Terms & Conditions</h4>
+        <ul>
+          <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+          <li><a href="{% url 'terms_of_use' %}">Terms of Use</a></li>
+          <li><a href="{% url 'security' %}">Security</a></li>
+          <li><a href="{% url 'other_policies' %}">Other Policies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+     
+       <p> <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;">123 Donora Lane, Pune, India</a></p>
+     <p>info@donora.ngo</p>
+      <p>+91 123 456 7890</p>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <div class="social-heading">
+        <hr class="line">
+        <span>Connect With Us</span>
+        <hr class="line">
+      </div>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" title="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"></path></svg></a>
+        <a href="https://x.com" target="_blank" title="X"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H21L14.19 10.59 22.24 21H16.16L11.13 14.43 5.5 21H2L9.13 13.01 1.36 3H7.61L12.22 9.03 17.53 3ZM16.37 19H18.09L7.7 5H5.87L16.37 19Z"/></svg></a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:block; margin:auto;">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#14484a"/>
+            <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-7.92a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z" fill="#fff"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>
+          </svg>
+        </a>
+        <a href="mailto:info@donora.org" title="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.015 6.24A2.25 2.25 0 0 1 2.25 3.75h19.5a2.25 2.25 0 0 1 2.235 2.49L12 13.065zm11.985-6.825v11.82a2.25 2.25 0 0 1-2.25 2.25H2.25a2.25 2.25 0 0 1-2.25-2.25V6.24l11.985 6.825L23.985 6.24z"></path></svg></a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 Donora Foundation | All Rights Reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('nav-menu').classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,503 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Liver</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <style>
+            /* === Base === */
+            .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      margin-left: auto;
+      text-align: right;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+    }
+
+
+
+
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #bde6e6;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* === Generic Fade Slide Animation === */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Infinite Scroll Animation === */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* === Skin Section === */
+.skin-section {
+  background: #d9f2f2;
+  padding: 0;   /* was 40px — now smaller */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  max-width: 1100px;
+  margin: 30px auto; /* smaller top & bottom margin */
+  text-align: center;
+  animation: fadeSlideUp 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.2s;
+}
+
+
+.skin-section h2 {
+  font-size: 4rem;
+  color: #5a1717;
+  margin-bottom: 40px;
+}
+
+.skin-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  font-size: large;
+}
+
+.slider-left {
+  flex: 1 1 45%;
+  max-width: 500px;
+  overflow: hidden;
+}
+
+.slider {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  width: calc(200%); /* doubled because of duplicate slides */
+  animation: scroll 10s linear infinite;
+}
+
+.slides img {
+  width: 50%; /* if you have 6 slides now */
+  height: 300px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.info-right {
+  flex: 1 1 45%;
+  text-align: left;
+}
+
+.info-right h3 {
+  font-size: 1.8rem;
+  color: #19456b;
+  margin-bottom: 20px;
+}
+
+.info-right p {
+  font-size: 1rem;
+  line-height: 1.6;
+    margin-right: 20px;
+}
+
+/* === Facts Section === */
+.skin-facts-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: #d9f2f2;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  max-width: 1100px;
+  margin: 50px auto;
+  gap: 40px;
+  animation: fadeSlideUp 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.4s;
+}
+
+.facts-text {
+  flex: 1;
+}
+
+.facts-text h2 {
+  font-size: 28px;
+  color: #205072;
+  margin-bottom: 20px;
+}
+
+.facts-text ul {
+  list-style: disc inside;
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+}
+
+.facts-text li {
+  margin-bottom: 10px;
+}
+
+.facts-image {
+  flex: 1;
+}
+
+.facts-image img {
+  width: 90%;
+  height: 20rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* === Important Info Section === */
+.important-info {
+  background: #e0f7f7;
+  border-left: 6px solid #205072;
+  padding: 30px 40px;
+  border-radius: 8px;
+  max-width: 1100px;
+  margin: 50px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.important-info h2 {
+  font-size: 26px;
+  color: #205072;
+  margin-bottom: 15px;
+}
+
+.important-info p {
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* === Tests Section === */
+.skin-tests-section {
+  background: #d9f2f2;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  max-width: 1100px;
+  margin: 50px auto;
+}
+
+.skin-tests-section h2 {
+  font-size: 28px;
+  color: #205072;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.skin-tests-section p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.skin-tests-section ul {
+  list-style: disc inside;
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+}
+
+/* === CTA Buttons === */
+.cta-buttons {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.cta-buttons a {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 12px 30px;
+  margin: 0 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #6e2020;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #329D9C;
+  color: #fff;
+}
+
+.cta-buttons a:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:hover {
+  background: #4a1010;
+}
+
+.btn-secondary:hover {
+  background: #237a78;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .skin-content,
+  .skin-facts-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .info-right {
+    text-align: center;
+  }
+
+  .facts-text h2,
+  .skin-tests-section h2,
+  .important-info h2 {
+    font-size:24px;
+}
+}
+</style>
+</head>
+<body>
+    <div style="overflow: hidden;">
+        <header class="site-header">
+          {% include 'header.html' %}
+        </header>
+
+
+    <body>
+           <section class="skin-section">
+            <h2>Liver</h2>
+            <div class="skin-content">
+              <div class="slider-left">
+                <div class="slider">
+                  <div class="slides">
+                    <img src="{% static 'images/liver1.jpg' %}" alt="Liver">
+                    <img src="{% static 'images/liver1.jpg' %}" alt="liver">
+                    <img src="{% static 'images/liver1.jpg' %}" alt="Liver">
+                    <!-- Duplicate for infinite loop
+                    <img src="C:\Users\Dell\Desktop\Donora\core\templates\images\voluntary-charity-donation-flat-vector-260nw-1411306565.jpg" alt="">
+                    <img src="C:\Users\Dell\Desktop\Donora\core\templates\images\voluntary-charity-donation-flat-vector-260nw-1411306565.jpg" alt="">
+                    <img src="image3.jpg" alt=""> -->
+                  </div>
+                </div>
+              </div>
+             
+          
+              <div class="info-right">
+                <h3>Information about the Liver Organ</h3>
+                <p>
+In living donor liver transplantation, the part of the liver donated is either the Right Hepatic Lobe (Segments V–VIII) or the Left Hepatic Lobe (Segments II–IV), depending on the recipient’s body size and clinical requirement. Anatomically, the human liver is divided into eight functional segments as described by Couinaud’s classification, each with its own vascular inflow, outflow, and biliary drainage. For adult recipients, the right hepatic lobe is most often donated because it provides sufficient functional liver mass, while for children, the left hepatic lobe or specifically the Left Lateral Segment (Segments II and III) is preferred. During transplantation, the branches of the portal vein, hepatic artery, hepatic veins, and bile duct are precisely divided and reconstructed to maintain proper blood circulation and bile flow. After surgery, both the donor’s remaining liver and the recipient’s transplanted graft regenerate through hepatocyte proliferation, stimulated by growth factors such as Hepatocyte Growth Factor (HGF) and Transforming Growth Factor-α (TGF-α), allowing the liver to restore its full size and function within a few weeks.
+                </p>
+              </div>
+            </div>
+          </section>
+          
+          <div class="skin-facts-section">
+            <div class="facts-text">
+              <h2>Interesting Facts about Liver</h2>
+              <ul>
+                <li>It processes 1.4 liters of blood per minute.
+          
+          </li>
+                <li>The liver stores essential vitamins and minerals, like iron and vitamin A.</li>
+                <li>Without the liver, your body can’t digest fats properly.</li>
+                <li>The liver performs over 500 vital functions, including filtering toxins and producing bile.</li>
+                <li>It can regenerate itself — even if up to 70% of it is removed, it can grow back!</li>
+              </ul>
+            </div>
+            <div class="facts-image">
+                <img src="{% static 'images/liver.jpg' %}" alt="Liver">
+            </div>
+          </div>
+          
+          <div class="important-info">
+            <h2>Important Information for Donors and Recipients</h2>
+            <p>
+                  All medical tests listed below, along with the entire donation process—from registration to surgery—are provided completely free of cost for both the donor and the recipient.
+                </p>
+                <p>
+                  Once a donor and recipient are found to be blood group compatible, they will be assigned to our partner hospital, SaveLife Hospital. A personalized schedule will be provided for all necessary tests and the surgical procedure. This schedule will appear on your "Notification" section once compatibility is confirmed.
+                </p>
+                <p>All further procedures related to organ donation, including registration, medical tests, transplantation, and related formalities, will be carried out exclusively at the designated hospital. The hospital authorities will be in charge of overseeing and managing the entire process.</p>
+             <p>A donor or recipient can register a maximum of <b>four times</b> only for the same organ or for different organs (excluding cancellations).
+
+If this limit is exceeded, a message will appear in your notification section stating: <b>“You have alredy used your 4 donor attempts.Please cancel one before reapplying”</b>
+
+To register again beyond this limit, please contact the Donora, who will assist you with the further process.</p>
+<p>If the donor or recipient wishes to donate or receive more than one organ, they must follow up with the hospital, which will provide all the necessary information and guide them through the process.</p>
+<p>A person with Type 1 Diabetes cannot donate Part of Liver. A person with Type 2 Diabetes cannot donate Part of Liver</p>
+<p>A person with any type of cancer cannot donate organ.</p>
+          </div>
+          
+          
+            <div class="skin-tests-section">
+            <h2>Tests Conducted Before Liver Donation</h2>
+            <p>
+              Before a Liver donation is accepted, several medical tests are performed to ensure the donor’s safety and the recipient’s health. These tests help screen for infections, compatibility, and overall tissue quality.
+            </p>
+            <ul>
+              <li>Blood Grouping and Cross-Matching</li>
+              <li>Liver Function Tests (LFTs)</li>
+              <li>Complete Blood Count (CBC)</li>
+              <li>HIV, Hepatitis B and C Screening</li>
+              <li>Blood Chemistry Panel (Kidney Function, Electrolytes, Sugar)
+          
+          </li>
+              <li>Coagulation Profile (PT/INR)</li>
+              <li>Imaging Tests (Ultrasound, CT Scan, MRI)
+          
+          </li>
+          <li>Donor Liver Volume Assessment</li>
+          <li>Chest X-Ray and ECG
+          
+          </li>
+          <li>General Medical History and Physical Examination</li>
+            </ul>
+          </div>
+          
+          <!-- <div class="important-info">
+            <h2>Important Information for Donors and Recipients</h2>
+            <p>
+              All medical tests listed below, along with the entire donation process—from registration to surgery—are provided completely free of cost for both the donor and the recipient.
+            </p>
+            <p>
+              Once a donor and recipient are found to be blood group compatible, they will be assigned to our partner hospital, SaveLife Hospital. A personalized schedule will be provided for all necessary tests and the surgical procedure. This schedule will appear on your dashboard once compatibility is confirmed.
+            </p>
+          </div> -->
+                
+          <div class="cta-buttons">
+          <!-- For Liver (organ_id=2) -->
+<a href="{% url 'become_donor' 2 %}" class="btn btn-primary">Become Donor</a>
+<a href="{% url 'become_recipient' 2 %}" class="btn btn-secondary">Become Recipient</a>
+          </div>
+          
+          <footer>
+            <div class="footer-top">
+              <div class="footer-about">
+                <img src="{% static 'images/removed.png' %}" alt="Logo">
+                <p>Donora is dedicated to saving lives through living organ donation awareness, kindness, and collective action. Together, we give the gift of life.</p>
+              </div>
+              <div class="footer-nav-blocks">
+                <div class="footer-links">
+                  <h4>Quick Links</h4>
+                  <ul>
+                    <li><a href="{% url 'aboutus' %}">About Us</a></li>
+                    <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+                    <li><a href="{% url 'contactus' %}">Contact</a></li>
+                  </ul>
+                </div>
+                <div class="footer-get-involved">
+                  <h4>Get Involved</h4>
+                  <ul>
+                    <li><a href="{% url 'signup' %}" >Become a Donor</a></li>
+                       <li><a href="{% url 'signup' %}" >Become a Recipient</a></li>
+                  </ul>
+                </div>
+                <div class="footer-terms">
+                  <h4>Terms & Conditions</h4>
+                  <ul>
+                    <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+                    <li><a href="{% url 'terms_of_use' %}">Terms of Use</a></li>
+                    <li><a href="{% url 'security' %}">Security</a></li>
+                    <li><a href="{% url 'other_policies' %}">Other Policies</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p> <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;">123 Donora Lane, Pune, India</a></p>
+                <p>info@donora.ngo</p>
+                <p>+91 123 456 7890</p>
+              </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+              <div class="footer-social">
+                <div class="social-heading">
+                  <hr class="line">
+                  <span>Connect With Us</span>
+                  <hr class="line">
+                </div>
+                <div class="social-icons">
+                  <a href="https://facebook.com" target="_blank" title="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"></path></svg></a>
+                  <a href="https://x.com" target="_blank" title="X"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H21L14.19 10.59 22.24 21H16.16L11.13 14.43 5.5 21H2L9.13 13.01 1.36 3H7.61L12.22 9.03 17.53 3ZM16.37 19H18.09L7.7 5H5.87L16.37 19Z"/></svg></a>
+                  <a href="https://instagram.com" target="_blank" title="Instagram">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:block; margin:auto;">
+                      <rect x="2" y="2" width="20" height="20" rx="5" fill="#14484a"/>
+                      <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-7.92a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z" fill="#fff"/>
+                      <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>
+                    </svg>
+                  </a>
+                  <a href="mailto:info@donora.org" title="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.015 6.24A2.25 2.25 0 0 1 2.25 3.75h19.5a2.25 2.25 0 0 1 2.235 2.49L12 13.065zm11.985-6.825v11.82a2.25 2.25 0 0 1-2.25 2.25H2.25a2.25 2.25 0 0 1-2.25-2.25V6.24l11.985 6.825L23.985 6.24z"></path></svg></a>
+                </div>
+              </div>
+              <div class="footer-copy">
+                <p>&copy; 2025 Donora Foundation | All Rights Reserved</p>
+              </div>
+            </div>
+          </footer>
+          
+          <script>
+            function toggleMenu() {
+              document.getElementById('nav-menu').classList.toggle('active');
+            }
+          </script>
+          
+          </body>
+          </html>
+          
+          

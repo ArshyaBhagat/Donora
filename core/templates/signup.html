@@ -1,0 +1,246 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up – Donora</title>
+  <style>
+    /* Styles remain unchanged */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html, body {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+    }
+
+    .left {
+      width: 70%;
+      background-color: #EAF4FF;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .left .logo img {
+      width: 140px;
+      margin-bottom: 10px;
+    }
+
+    .left .welcome h1 {
+      font-size: 32px;
+      color: #1A237E;
+      margin-bottom: 20px;
+    }
+
+    .left .welcome p {
+      font-size: 20px;
+      color: #2A70B8;
+      max-width: 90%;
+      line-height: 1.5;
+    }
+
+    .left .plant {
+      width: 350px;
+      margin-top: 10px;
+    }
+
+    .right {
+      width: 70%;
+      background-color: #EAF4FF;
+      background-image: url('{% static "images/leaves.png" %}');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-box {
+      width: 80%;
+      max-width: 500px;
+      background: linear-gradient(135deg, #1A237E, #2A70B8);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-box h2 {
+      color: #ffffff;
+      margin-bottom: 25px;
+    }
+
+    .form-box label {
+      color: #ffffff;
+      align-self: flex-start;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 60px;
+      border: 1px solid #90A4AE;
+    }
+
+    .form-box input[type="submit"] {
+      margin-top: 18px;
+      background-color: #43A047;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .form-box input[type="submit"]:hover {
+      background-color: #388E3C;
+    }
+
+    .error, .field-error {
+      color: red;
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .field-error {
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left, .right {
+        width: 100%;
+        height: 50vh;
+      }
+
+      .left .plant {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Left Section -->
+    <div class="left">
+      <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Logo">
+      </div>
+      <div class="welcome">
+        <h1>Welcome to Donora!</h1>
+        <p>Fill the form to get started. We're here to connect lives and make organ donation accessible, trustworthy, and compassionate.</p>
+      </div>
+      <img src="{% static 'images/plant.jpg' %}" class="plant" alt="Plant">
+    </div>
+
+    <!-- Right Section -->
+    <div class="right">
+      <div class="form-box">
+        <h2>Sign Up</h2>
+
+        {% if messages %}
+          {% for message in messages %}
+            <div class="error">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+
+        <form name="signupForm" method="post" onsubmit="return validateForm()">
+          {% csrf_token %}
+
+          <div class="error" id="error-msg"></div>
+
+          <label>Username</label>
+          <input type="text" name="username" value="{{ form.username.value|default_if_none:'' }}" placeholder="Enter Name">
+          {% if form.username.errors %}
+            <div class="field-error">{{ form.username.errors.0 }}</div>
+          {% endif %}
+
+          <label>Phone No</label>
+          <input type="tel" name="phone" value="{{ form.phone.value|default_if_none:'' }}" placeholder="+91 9876543210">
+          {% if form.phone.errors %}
+            <div class="field-error">{{ form.phone.errors.0 }}</div>
+          {% endif %}
+
+          <label>Email ID</label>
+          <input type="email" name="email" value="{{ form.email.value|default_if_none:'' }}" placeholder="example@gmail.com">
+          {% if form.email.errors %}
+            <div class="field-error">{{ form.email.errors.0 }}</div>
+          {% endif %}
+
+          <label>Location</label>
+          <input type="text" name="location" value="{{ form.location.value|default_if_none:'' }}" placeholder="Enter your Place">
+          {% if form.location.errors %}
+            <div class="field-error">{{ form.location.errors.0 }}</div>
+          {% endif %}
+
+          <label>Password</label>
+          <input type="password" name="password" placeholder="At least 6 characters with a letter">
+          {% if form.password.errors %}
+            <div class="field-error">{{ form.password.errors.0 }}</div>
+          {% endif %}
+
+          <label>Confirm Password</label>
+          <input type="password" name="confirm_password" placeholder="Re-enter password">
+          {% if form.confirm_password.errors %}
+            <div class="field-error">{{ form.confirm_password.errors.0 }}</div>
+          {% endif %}
+
+          <input type="submit" value="Sign Up">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Validation Script -->
+  <script>
+    function validateForm() {
+      const f = document.forms["signupForm"];
+      const { username, phone, email, location, password, confirm_password } = f;
+      const err = document.getElementById("error-msg");
+
+      if (!username.value || !phone.value || !email.value || !location.value || !password.value || !confirm_password.value) {
+        err.innerText = "All fields are required!";
+        return false;
+      }
+
+      if (password.value.length < 6 || !/[A-Za-z]/.test(password.value)) {
+        err.innerText = "Password must be at least 6 characters and contain at least one letter!";
+        return false;
+      }
+
+      if (password.value !== confirm_password.value) {
+        err.innerText = "Passwords do not match!";
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+</body>
+</html>

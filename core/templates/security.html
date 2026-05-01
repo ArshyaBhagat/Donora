@@ -1,0 +1,772 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Security Policy – Donora</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    /* --- Professional Security Policy Styles --- */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      margin-left: auto;
+      text-align: right;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f8fbff 0%, #e8f4f8 100%);
+      font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #1a365d;
+      line-height: 1.6;
+    }
+
+    /* Main Content Container */
+    .security-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* Professional Title Section */
+    .security-title-section {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, #2d3748 0%, #1a365d 100%);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .security-title-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .security-title-section h1 {
+      color: #ffffff;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .security-subtitle {
+      color: #cbd5e0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Last Updated Badge */
+    .last-updated {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-top: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Content Grid */
+    .security-content {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    /* Table of Contents */
+    .security-toc {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .security-toc h3 {
+      color: #2d3748;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0 0 20px 0;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .security-toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .security-toc li {
+      margin-bottom: 12px;
+    }
+
+    .security-toc a {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: block;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .security-toc a:hover {
+      background: #f7fafc;
+      color: #2b6cb0;
+      border-left-color: #2b6cb0;
+      transform: translateX(4px);
+    }
+
+    /* Main Content Area */
+    .security-sections {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    /* Individual Sections */
+    .security-section {
+      padding: 40px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .security-section:last-child {
+      border-bottom: none;
+    }
+
+    .security-section h2 {
+      color: #2d3748;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0 0 24px 0;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #3182ce;
+      position: relative;
+      scroll-margin-top: 120px;
+
+    }
+
+    .security-section h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #3182ce, #63b3ed);
+      border-radius: 2px;
+    }
+
+    .security-section p {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .security-section ul {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+
+    .security-section li {
+      margin-bottom: 8px;
+    }
+
+    /* Highlight Boxes */
+    .highlight-box {
+      background: linear-gradient(135deg, #ebf8ff 0%, #f0fff4 100%);
+      border: 1px solid #bee3f8;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border-left: 4px solid #3182ce;
+    }
+
+    .highlight-box h4 {
+      color: #2c5282;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      color: #2d3748;
+    }
+
+    /* Security Boxes */
+    .security-box {
+      background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%);
+      border: 1px solid #f6ad55;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border-left: 4px solid #ed8936;
+    }
+
+    .security-box h4 {
+      color: #c05621;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .security-box p {
+      margin: 0;
+      color: #2d3748;
+    }
+
+    /* Critical Security Boxes */
+    .critical-box {
+      background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
+      border: 1px solid #fc8181;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border-left: 4px solid #e53e3e;
+    }
+
+    .critical-box h4 {
+      color: #c53030;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .critical-box p {
+      margin: 0;
+      color: #2d3748;
+    }
+
+    /* Contact Information */
+    .contact-info {
+      background: #f7fafc;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border: 1px solid #e2e8f0;
+    }
+
+    .contact-info h4 {
+      color: #2d3748;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+    }
+
+    .contact-info a {
+      color: #3182ce;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* Security Feature Grid */
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .security-item {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    .security-item h5 {
+      color: #2d3748;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .security-item p {
+      color: #4a5568;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .security-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .security-toc {
+        position: static;
+        order: -1;
+      }
+
+      .security-toc ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .security-toc li {
+        margin-bottom: 0;
+      }
+
+      .security-toc a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .security-main {
+        padding: 20px 16px 40px;
+      }
+
+      .security-title-section {
+        padding: 40px 24px;
+        margin-bottom: 40px;
+      }
+
+      .security-title-section h1 {
+        font-size: 2.5rem;
+      }
+
+      .security-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .security-section {
+        padding: 24px;
+      }
+
+      .security-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .security-section p,
+      .security-section ul {
+        font-size: 1rem;
+      }
+
+      .security-toc {
+        padding: 20px;
+      }
+
+      .security-toc h3 {
+        font-size: 1.1rem;
+      }
+
+      .security-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .security-title-section h1 {
+        font-size: 2rem;
+      }
+
+      .security-section {
+        padding: 20px;
+      }
+
+      .highlight-box,
+      .security-box,
+      .critical-box,
+      .contact-info {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+        <div style="overflow: hidden;">
+            <header class="site-header">
+              {% include 'header.html' %}
+            </header>
+
+
+<main class="security-main">
+  <!-- Title Section -->
+  <section class="security-title-section">
+    <h1>Security Policy</h1>
+    <p class="security-subtitle">Comprehensive security measures protecting your sensitive medical and personal data</p>
+    <div class="last-updated">Last updated: July 2025</div>
+  </section>
+
+  <!-- Content Grid -->
+  <div class="security-content">
+    <!-- Table of Contents -->
+    <aside class="security-toc">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#commitment">Security Commitment</a></li>
+        <li><a href="#encryption">Data Encryption</a></li>
+        <li><a href="#access-control">Access Control</a></li>
+        <li><a href="#infrastructure">Infrastructure Security</a></li>
+        <li><a href="#incident">Incident Management</a></li>
+        <li><a href="#user-responsibilities">User Responsibilities</a></li>
+        <li><a href="#compliance">Security Compliance</a></li>
+        <li><a href="#contact">Security Contact</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="security-sections">
+      <!-- Security Commitment -->
+      <section  class="security-section">
+        <h2 id="commitment">Our Security Commitment</h2>
+        <p>At Donora, protecting your information is not just a priority—it's a fundamental responsibility that guides every aspect of our operations. We understand that organ donation involves the most sensitive personal and medical information, and we are committed to implementing and maintaining the highest standards of data security.</p>
+        
+        <div class="highlight-box">
+          <h4>Zero-Tolerance Security Policy</h4>
+          <p>We enforce robust security standards to protect personal and medical data at every step of the organ donation process, from initial registration to post-transplant follow-up.</p>
+        </div>
+
+        <h4>Our Security Principles:</h4>
+        <ul>
+          <li><strong>Confidentiality:</strong> Ensuring that sensitive information is accessible only to authorized individuals</li>
+          <li><strong>Integrity:</strong> Maintaining the accuracy and completeness of data throughout its lifecycle</li>
+          <li><strong>Availability:</strong> Ensuring that critical systems and data are accessible when needed</li>
+          <li><strong>Accountability:</strong> Maintaining detailed logs and audit trails for all system access</li>
+          <li><strong>Transparency:</strong> Providing clear information about our security practices and policies</li>
+        </ul>
+
+        <p>Our security framework is designed to meet and exceed industry standards for healthcare data protection, ensuring that your trust in our platform is well-founded.</p>
+      </section>
+
+      <!-- Data Encryption -->
+      <section  class="security-section">
+        <h2 id="encryption">Data Encryption</h2>
+        <p>We employ state-of-the-art encryption technologies to protect your data both in transit and at rest, ensuring that your sensitive information remains secure at all times.</p>
+        
+        <div class="security-grid">
+          <div class="security-item">
+            <h5>Data in Transit</h5>
+            <p>TLS 1.3 encryption for all data transmission between your device and our servers</p>
+          </div>
+          <div class="security-item">
+            <h5>Data at Rest</h5>
+            <p>AES-256 encryption for all stored data in our secure databases</p>
+          </div>
+        </div>
+
+        <h4>Encryption Standards:</h4>
+        <ul>
+          <li><strong>Transport Layer Security (TLS) 1.3:</strong> All data exchanged between your browser and our servers</li>
+          <li><strong>AES-256 Encryption:</strong> Medical results, user profiles, and all sensitive data storage</li>
+          <li><strong>Encrypted Backups:</strong> All backup systems use the same encryption standards</li>
+        </ul>
+
+        <div class="security-box">
+          <h4>Continuous Encryption Monitoring</h4>
+          <p>We continuously monitor encryption status and for any anomalies or potential vulnerabilities.</p>
+        </div>
+      </section>
+
+      <!-- Access Control -->
+      <section  class="security-section">
+        <h2 id="access-control">Access Control</h2>
+        <p>We implement comprehensive access control measures to ensure that sensitive medical and personal records are accessible only to authorized personnel for legitimate purposes.</p>
+        
+        <h4>Multi-Layered Access Control:</h4>
+        <ul>
+          <li><strong>Role-Based Access Control (RBAC):</strong> Users receive access only to data necessary for their specific role</li>
+          <li><strong>Multi-Factor Authentication (MFA):</strong> Required for all administrative and healthcare personnel access</li>
+          <li><strong>Principle of Least Privilege:</strong> Users are granted the minimum access necessary to perform their duties</li>
+          <li><strong>Regular Access Reviews:</strong> Quarterly reviews of all user access permissions</li>
+        </ul>
+
+        <div class="highlight-box">
+          <h4>Authorized Personnel Only</h4>
+          <p>Only authorized healthcare personnel, system administrators, and designated support staff have access to sensitive medical or personal records, and only for legitimate, documented purposes.</p>
+        </div>
+
+        <div class="security-box">
+          <h4>Emergency Access Procedures</h4>
+          <p>In medical emergencies, we have secure procedures for authorized medical personnel to access critical patient information while maintaining full audit trails.</p>
+        </div>
+      </section>
+
+      <!-- Infrastructure Security -->
+      <section  class="security-section">
+        <h2 id="infrastructure">Infrastructure Security</h2>
+        <p>Our hosting infrastructure is built with security as the foundation, incorporating multiple layers of protection to prevent data breaches and ensure system integrity.</p>
+        
+
+        <div class="security-grid">
+          <div class="security-item">
+            <h5>Regular Audits</h5>
+            <p>Quarterly security audits by independent third-party experts</p>
+          </div>
+          <div class="security-item">
+            <h5>Vulnerability Assessments</h5>
+            <p>Continuous scanning and assessment of potential vulnerabilities</p>
+          </div>
+          <div class="security-item">
+            <h5>Secure Configurations</h5>
+            <p>Hardened server configurations following industry best practices</p>
+          </div>
+          <div class="security-item">
+            <h5>Patch Management</h5>
+            <p>Automated security updates and patch deployment systems</p>
+          </div>
+        </div>
+
+        <p>Our hosting infrastructure undergoes regular audits, vulnerability assessments, and secure configurations to prevent data breaches and maintain the highest levels of security.</p>
+      </section>
+      
+        
+
+      <!-- Incident Management -->
+      <section  class="security-section">
+        <h2 id="incident">Incident Management</h2>
+        <p>In the unlikely event of a security incident, we have comprehensive procedures in place to respond quickly, minimize impact, and ensure full transparency with affected users.</p>
+        
+        <h4>Incident Response Process:</h4>
+        <ul>
+          <li><strong>Detection:</strong> Immediate identification</li>
+          <li><strong>Assessment:</strong> Rapid evaluation of incident scope and impact</li>
+          <li><strong>Containment:</strong> Immediate steps to prevent further damage</li>
+          <li><strong>Investigation:</strong> Thorough forensic analysis of the incident</li>
+          <li><strong>Recovery:</strong> Restoration of normal operations and data integrity</li>
+          <li><strong>Communication:</strong> Transparent reporting to affected users and authorities</li>
+        </ul>
+
+        <div class="critical-box">
+          <h4>Breach Notification Commitment</h4>
+          <p>If a data breach occurs, we will notify affected users and relevant authorities within legally required timeframes. A full investigation and remediation will follow immediately.</p>
+        </div>
+
+        <h4>Post-Incident Actions:</h4>
+        <ul>
+          <li>Comprehensive incident analysis and documentation</li>
+          <li>Implementation of additional security measures to prevent recurrence</li>
+          <li>Regular follow-up communications with affected users</li>
+          <li>Independent security audits following any significant incident</li>
+        </ul>
+
+        <div class="contact-info">
+          <h4>Security Incident Reporting</h4>
+          <p>If you suspect a security incident or have security concerns, contact us immediately:</p>
+          <p><strong>Security Hotline:</strong> +91 123 456 7890 (24/7)</p>
+          <p><strong>Email:</strong> <a href="mailto:info@donora.ngo">info@donora.ngo</a></p>
+        </div>
+      </section>
+
+      <!-- User Responsibilities -->
+      <section  class="security-section">
+        <h2 id="user-responsibilities">User Responsibilities</h2>
+        <p>While we implement comprehensive security measures, users also play a crucial role in maintaining the security of their accounts and personal information.</p>
+        
+        <h4>Account Security Best Practices:</h4>
+        <ul>
+          <li><strong>Strong Passwords:</strong> Use complex, unique passwords for your Donora account</li>
+          <li><strong>Confidential Credentials:</strong> Keep login credentials confidential and never share them</li>
+          <li><strong>Device Security:</strong> Ensure your devices are up-to-date and protected against malware</li>
+          <li><strong>Regular Updates:</strong> Keep your devices and browsers updated with latest security patches</li>
+          <li><strong>Suspicious Activity:</strong> Report any suspicious activity immediately</li>
+        </ul>
+
+        <div class="security-box">
+          <h4>Password Security Guidelines</h4>
+          <p>Never share passwords, one-time codes, or authentication tokens with anyone. Donora staff will never ask for your password or login credentials.</p>
+        </div>
+
+        <h4>What to Report:</h4>
+        <ul>
+          <li>Unauthorized access attempts to your account</li>
+          <li>Suspicious emails claiming to be from Donora</li>
+          <li>Unexpected changes to your account information</li>
+          <li>Any security-related concerns or observations</li>
+        </ul>
+
+        <p>By following these best practices, you help us maintain a secure environment for all users and protect your personal information.</p>
+      </section>
+
+      <!-- Security Compliance -->
+      <section  class="security-section">
+        <h2 id="compliance">Security Compliance</h2>
+        <p>Donora adheres to national and international security standards and regulations to ensure the highest levels of data protection and privacy.</p>
+        
+        <h4>Compliance Standards:</h4>
+        <ul>
+          <li><strong>Indian IT Act 2000:</strong> Full compliance with Indian data protection laws</li>
+          <li><strong>Healthcare Regulations:</strong> Adherence to medical data protection standards</li>
+          <li><strong>ISO 27001:</strong> Information security management system standards</li>
+          <li><strong>HIPAA Guidelines:</strong> Following international healthcare privacy best practices</li>
+        </ul>
+
+        <div class="highlight-box">
+          <h4>Regular Compliance Audits</h4>
+          <p>We undergo regular third-party security audits and compliance assessments to ensure we maintain the highest standards of data protection.</p>
+        </div>
+
+        <h4>Certification and Validation:</h4>
+        <ul>
+          <li>Annual security certifications and renewals</li>
+          <li>Regular compliance reviews and updates</li>
+          <li>Staff security training and certification programs</li>
+        </ul>
+      </section>
+
+      <!-- Security Contact -->
+      <section  class="security-section">
+        <h2 id="contact">Security Contact Information</h2>
+        <p>For all security-related inquiries, concerns, or incident reports, please use the appropriate contact method below.</p>
+        
+        <div class="contact-info">
+          <h4>Security Team Contacts</h4>
+          <p>If you have any security-related questions or need to report an incident, please contact our security team:</p>
+          <p><strong>Security Hotline:</strong> +91 123 456 7890</p>
+          <p><strong>General Security Questions:</strong> <a href="mailto:info@donora.ngo">info@donora.ngo</a></p>
+        </div>
+
+        
+        <p>We take all security concerns seriously and are committed to responding promptly to any security-related inquiries or incidents. Your vigilance and cooperation help us maintain the highest levels of security for all users.</p>
+
+        <div class="critical-box">
+          <h4>Emergency Security Contact</h4>
+          <p>For immediate security emergencies or suspected data breaches, call our 24/7 security hotline: +91 123 456 7890. Do not delay in reporting critical security incidents.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-about">
+      <img src="{% static 'images/removed.png' %}" alt="Logo">
+      <p>Donora is dedicated to saving lives through living organ donation awareness, kindness, and collective action. Together, we give the gift of life.</p>
+    </div>
+    <div class="footer-nav-blocks">
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+          <li><a href="{% url 'contactus' %}">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-get-involved">
+        <h4>Get Involved</h4>
+        <ul>
+           <li><a href="{% url 'signup' %}">Become a Donor</a></li>
+          <li><a href="{% url 'signup' %}">Become a Recipient</a></li>
+        </ul>
+      </div>
+      <div class="footer-terms">
+        <h4>Terms & Conditions</h4>
+        <ul>
+          <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+          <li><a href="{% url 'terms_of_use' %}">Terms of Use</a></li>
+          <li><a href="{% url 'security' %}">Security</a></li>
+          <li><a href="{% url 'other_policies' %}">Other Policies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+       <p> <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;">123 Donora Lane, Pune, India</a></p>
+      <p>info@donora.ngo</p>
+      <p>+91 123 456 7890</p>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <div class="social-heading">
+        <hr class="line">
+        <span>Connect With Us</span>
+        <hr class="line">
+      </div>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" title="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"></path></svg></a>
+        <a href="https://x.com" target="_blank" title="X"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H21L14.19 10.59 22.24 21H16.16L11.13 14.43 5.5 21H2L9.13 13.01 1.36 3H7.61L12.22 9.03 17.53 3ZM16.37 19H18.09L7.7 5H5.87L16.37 19Z"/></svg></a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:block; margin:auto;">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#14484a"/>
+            <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-7.92a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z" fill="#fff"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>
+          </svg>
+        </a>
+        <a href="mailto:info@donora.org" title="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.015 6.24A2.25 2.25 0 0 1 2.25 3.75h19.5a2.25 2.25 0 0 1 2.235 2.49L12 13.065zm11.985-6.825v11.82a2.25 2.25 0 0 1-2.25 2.25H2.25a2.25 2.25 0 0 1-2.25-2.25V6.24l11.985 6.825L23.985 6.24z"></path></svg></a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 Donora Foundation | All Rights Reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('nav-menu').classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>

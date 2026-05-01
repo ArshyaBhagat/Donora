@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Transplant Acknowledgment</title>
+  <style>
+    .receipt-box {
+      max-width: 480px;
+      margin: 48px auto;
+      background: #f0fbfb;
+      padding: 32px;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      font-family: Arial, sans-serif;
+    }
+    .logo-container {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .logo-container img { height: 54px; }
+    .website-name { font-size: 1.5em; font-weight: bold; color: #205072; margin-top: 5px; }
+    .tagline { font-size: 1em; font-style: italic; color: #117364; margin-bottom: 18px; }
+    .header-divider {
+      border: none;
+      border-top: 3px solid #28a745;
+      margin: 18px 0 2em 0;
+      width: 100%;
+    }
+    .acknowledgment-title {
+      color: #117364;
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 1.2em;
+      margin-top: 0.6em;
+    }
+    .generation-dt {
+      font-size: 1em;
+      color: #117364;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-align: left;
+      margin-bottom: 1em;
+      margin-top: -0.5em;
+    }
+    .row { margin-bottom: 1em; }
+    .label { font-weight: bold; }
+    .footer-contact {
+      border-top: 1px solid #b5dbe7;
+      margin-top: 28px;
+      padding-top: 12px;
+      font-size: 1em;
+      color: #176c54;
+      text-align: left;
+    }
+    .footer-label { font-weight: 600; }
+    @media (max-width: 600px) {
+      .receipt-box { padding: 14px 2vw; }
+      .footer-contact { font-size: 0.96em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt-box">
+    <div class="logo-container">
+      <img src="{% static 'images/logo.png' %}" alt="Logo">
+      <div class="website-name">Donora</div>
+      <div class="tagline">The soul of giving</div>
+    </div>
+    <hr class="header-divider">
+
+    <div class="acknowledgment-title">Transplantation Acknowledgment</div>
+    <div class="generation-dt">
+      Generated on: {{ generated_datetime }}
+    </div>
+
+    <div class="row"><span class="label">Username:</span> {{ username }}</div>
+    <div class="row"><span class="label">Name:</span>
+      {% if role == 'donor' %}
+        {{ match.donor.name }}
+      {% elif role == 'recipient' %}
+        {{ match.recipient.name }}
+      {% else %}
+        N/A
+      {% endif %}
+    </div>
+    <div class="row"><span class="label">Transplantation ID:</span> {{ match.transplantation_id }}</div>
+    <div class="row"><span class="label">Organ:</span>
+      {% if match.organ %}
+        {{ match.organ.organ_name }}
+      {% else %}
+        N/A
+      {% endif %}
+    </div>
+    <div class="row"><span class="label">Role:</span> {{ role|title }}</div>
+   <div class="row">
+  <span class="label">Hospital Name:</span>
+  SaveLife Hospital<br>
+  <span class="label">Location:</span>
+  {% comment %} <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;"> {% endcomment %}
+    SaveLife Hospital, Deccan Gymkhana, Pune, Plot No. 30-C, Karve Rd, Kachare Colony, Deccan Gymkhana, Pune, Maharashtra 411004
+  </a>
+</div>
+
+    <div class="row"><span class="label">Visit Days:</span> Next Saturday or Sunday</div>
+    {% comment %} <div style="margin-top: 1.5em; color: #555;">
+      Show this page and your photo ID at the hospital desk.
+    </div> {% endcomment %}
+
+    <div class="footer-contact">
+      <span class="footer-label">Address:</span> 123 Donora Lane, Pune, India<br>
+      <span class="footer-label">Email:</span> info@donora.ngo<br>
+      <span class="footer-label">Phone:</span> +91 123 456 7890
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1003 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <style>
+
+    /* Header customization */
+    /* === RESET === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === BODY === */
+
+
+.header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      margin-left: auto;
+      text-align: right;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+    }
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image: url('../semister-4/images/juu.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* === HEADER === */
+header, .site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #96d5da;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  overflow: visible;
+}
+
+header .logo img {
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  overflow: visible;
+}
+
+nav ul li {
+  position: relative;
+  overflow: visible;
+}
+
+nav ul a {
+  text-decoration: none;
+  color:rgb(18, 68, 92);
+  font-weight: bold;
+  transition: color 0.3s;
+  line-height: 40px;
+}
+
+nav ul a:hover {
+  color: #ffcc00;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0 20px;
+  line-height: 40px;
+  background-color: #1f720e;
+  color: #fff !important;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #cc1f1a;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    flex-direction: column;
+    background: #74c6cc;
+    width: 100%;
+    display: none;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  nav ul li {
+    text-align: center;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.80); /* make image lighter (less dark) */
+}
+
+.hero-text {
+  position: absolute;
+  top: 35%;  /* move text up */
+  left: 5%;
+  transform: translateY(-50%);
+  text-align: left;
+  color: #fff;
+  max-width: 600px;
+}
+
+#logoname {
+  font-size: 5rem;
+  color: #1b455e;
+  margin-bottom: 0.3em;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin-bottom: 0.3em;
+}
+
+.hero-text p {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.hero-text .about {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
+  max-width: 500px;
+  color: rgb(18, 68, 92);
+}
+
+.info-section {
+  background: #b3dee4;
+  padding: 60px 20px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.info-section h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.info-section .info-desc {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.info-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.info-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 30px 20px;
+  width: 300px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.info-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border: 2px dashed #bbb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-icon img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.info-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #691217;
+  margin-bottom: 40px;
+  
+}
+
+.info-card p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+
+
+
+{% comment %} .notice-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: right;
+  background: #b3e2e5;
+  padding: 60px;
+  gap: 40px;
+  
+  
+}
+
+.notice-image img {
+  max-width: 450px;
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-right: 250px;
+}
+
+.notice-box {
+  background: #fff;
+  border: 2px solid #205072;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 500px;
+  margin-right: 100px;
+}
+
+.notice-box h2 {
+  font-size: 24px;
+  color: #205072;
+  margin-bottom: 15px;
+
+}
+
+.notice-wrapper {
+  height: 120px; /* adjust visible area */
+  overflow: hidden;
+  position: relative;
+}
+
+.notice-content {
+  display: inline-block;
+  animation: scroll-up 5s linear infinite;
+}
+
+.notice-content p {
+  font-size: 18px;
+  color: #333;
+  line-height: 2;
+  margin: 0;
+} {% endcomment %}
+
+{% comment %} @keyframes scroll-up {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+} {% endcomment %}
+
+{% comment %} @media (max-width: 768px) {
+  .notice-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .notice-image img {
+    max-width: 100%;
+  }
+
+  .notice-box {
+    max-width: 100%;
+  }
+} {% endcomment %}
+
+.success-container {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 40px 0;
+  padding-left: 190px;
+  background-color: #c2e3e9; /* light background */
+  margin-bottom: 40px;
+}
+
+.success-box {
+  background-color: #e0f7fa;
+  padding: 30px 60px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.success-count {
+  font-size: 48px;
+  font-weight: bold;
+  color: #751116; /* teal/dark green */
+  margin: 0;
+}
+
+.success-label {
+  font-size: 20px;
+  color: #265a6e;
+  margin-top: 10px;
+  
+}
+
+.success-description{
+  font-size: 20px;
+  color: #333;
+  margin-top: 10px;
+  line-height: 1.5;
+  text-align: left;
+  padding: 5%;
+}
+.success-stories-section {
+  background-color: #c2e3e9;
+  padding: 60px 20px;
+  font-family: Arial, sans-serif;
+  margin-bottom: 40px;
+}
+
+.success-stories-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.success-stories-section h2 {
+  text-align: center;
+  font-size: 2.7em;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.success-stories-section .subtitle {
+  text-align: center;
+  font-size: 1.5em;
+  color: #c90c0c;
+  margin-bottom: 50px;
+}
+
+.story-row {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.story-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.story-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); */
+}
+
+.story-text {
+  flex: 1;
+}
+
+.story-text h3 {
+  font-size: 1.8em;
+  color: #16462a;
+  margin-bottom: 15px;
+}
+
+.story-text p {
+  font-size: 1.1em;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .story-row {
+    flex-direction: column;
+    text-align: center;
+  }
+  .story-row.reverse {
+    flex-direction: column;
+  }
+  .story-text {
+    text-align:center;
+}
+}
+
+
+/* === FOOTER BASE === */
+footer {
+  background: #96d5da;
+  color:rgb(18, 68, 92);
+  padding: 60px 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* === UPPER FOOTER === */
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  gap: 40px;
+}
+
+/* === ABOUT === */
+.footer-about {
+  flex: 1 1 250px;
+}
+
+.footer-about img {
+  width: 140px;
+  margin-bottom: 15px;
+}
+
+.footer-about p {
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* === NAV BLOCKS WRAPPER === */
+.footer-nav-blocks {
+  display: flex;
+  flex: 1 1 600px;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+
+
+.footer-links,
+.footer-get-involved,
+.footer-terms {
+  flex: 1 1 180px;
+}
+
+.footer-links h4,
+.footer-get-involved h4,
+.footer-terms h4,
+.footer-contact h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #216119;
+  display: inline-block;
+  padding-bottom: 5px;
+  
+  
+}
+
+.footer-links ul,
+.footer-get-involved ul,
+.footer-terms ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li,
+.footer-get-involved ul li,
+.footer-terms ul li {
+  margin-bottom: 10px;
+}
+
+.footer-links ul li a,
+.footer-get-involved ul li a,
+.footer-terms ul li a {
+  text-decoration: none;
+  color:rgb(18, 68, 92);
+  transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover,
+.footer-get-involved ul li a:hover,
+.footer-terms ul li a:hover {
+  color: #ffcc00;
+}
+
+
+.footer-links,
+.footer-get-involved,
+.footer-terms {
+  flex: 1 1 200px;
+}
+
+.footer-links h4,
+.footer-get-terms h4,
+.footer-terms h4,
+.footer-contact h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #216119;
+  display: inline-block;
+  padding-bottom: 5px;
+  justify-items: right;
+  
+}
+
+.footer-links ul,
+.footer-get-terms ul,
+.footer-terms ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li,
+.footer-get-terms ul li,
+.footer-terms ul li {
+  margin-bottom: 10px;
+}
+
+.footer-links ul li a,
+.footer-get-terms ul li a,
+.footer-terms ul li a {
+  text-decoration: none;
+  color: rgb(18, 68, 92)0;
+  transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover,
+.footer-get-terms ul li a:hover,
+.footer-terms ul li a:hover {
+  color: #ffcc00;
+}
+
+.footer-links,
+.footer-get-terms,
+.footer-terms {
+  flex: 1 1 200px;
+}
+
+/* === CONTACT US === */
+.footer-contact {
+  flex: 1 1 200px;
+  text-align: right;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.footer-contact i {
+  margin-right: 8px;
+  color: #1f720e;
+}
+
+/* === DIVIDER === */
+.footer-divider {
+  border: none;
+  border-top: 1px solid #555;
+  margin: 40px auto 20px;
+  max-width: 1200px;
+}
+
+/* === SOCIAL & COPYRIGHT === */
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  gap: 30px;
+}
+
+.footer-social {
+  flex: 1 1 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.footer-social .social-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.footer-social .social-heading .line {
+  flex: 1;
+  height: 1px;
+  background: #f0f0f0;
+  margin: 0 10px;
+  border: none;
+}
+
+.footer-social .social-heading span {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.footer-social .social-icons {
+  display: inline-flex;
+  gap: 15px;
+}
+
+.footer-social .social-icons a {
+  background: #ffffff;
+  color: #004444;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.footer-social .social-icons a:hover {
+  background: #00cc99;
+  color: #ffffff;
+}
+
+.footer-copy {
+  text-align: center;
+  font-size: 20px;
+  color: #176b25;
+  margin-top: 0px;
+}
+
+/* Add spacing after hero */
+.hero {
+  margin-bottom: 40px;
+}
+
+/* Add spacing after notices */
+.notice-section {
+  margin-bottom: 40px;
+}
+
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-nav-blocks {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-contact {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .footer-bottom {
+    flex-direction:column;
+}
+}
+</style>
+</head>
+
+<body>
+  <div style="overflow-x: hidden;">
+      <header class="site-header">
+        {% include 'header.html' %}
+      </header>
+
+      <section class="hero">
+        <img src="{% static 'images/hero.jpg' %}" alt="Banner" class="hero-img" />
+        <div class="hero-text">
+          <h1 id="logoname">Donora</h1>
+        
+          <p class="lang-text" data-en="The Soul Of Giving" data-mr="देण्याची आत्मा">
+            !! The Soul Of Giving  !!
+          </p>
+          <p class="about">
+           Donora is a non-profit organization dedicated to promoting living organ donation awareness and saving lives. We connect donors and recipients through real-time matching, offering more immediate opportunities to save lives and spread the gift of life.
+          </p>
+        </div>
+      </section>
+      
+      
+      
+      <section class="info-section">
+        
+      
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-icon">
+              <img src="{% static 'images/he1.jpg' %}" alt="Heart Donation" />
+            </div>
+            <h3>About Donation</h3>
+            <p>
+               Organ donation is a noble act of donating your organs after death to save others’ lives. It gives patients in need a second chance and spreads hope.
+        </p>
+      
+          </div>
+      
+          <div class="info-card">
+            <div class="info-icon">
+              <img src="{% static 'images/he2.jpg' %}" alt="Transplantation" />
+            </div>
+            <h3>Importance of Donation</h3>
+            <p>
+              Organ donation saves lives every day. By pledging your organs, you give hope to patients waiting for transplants and a second chance at life.
+            </p>
+          </div>
+      
+          <div class="info-card">
+            <div class="info-icon">
+              <img src="{% static 'images/he3.jpg' %}" alt="Who Can Donate" />
+            </div>
+            <h3>How You Can Help</h3>
+            <p>
+             Join our mission — register as an organ donor, spread awareness in your community, and support families during the donation process.
+          </div>
+        </div>
+      </section>
+      
+      {% comment %} <section class="notice-section">
+        <div class="notice-image">
+          <img src="{% static 'images/he4.jpg' %}" alt="Important Notice Image" />
+        </div>
+        <div class="notice-box">
+          <h2>Important Notices</h2>
+          <div class="notice-wrapper">
+            <div class="notice-content">
+              <p>!!One Kidney urgently needed for a patient with B+ blood group!!</p>
+              <p>!!Donated skin is needed for burn patients and critical surgeries!!</p>
+              <p>Be a donor. Give the gift of life.</p>
+              <p>Help someone heal — pledge skin donation today.</p>
+            </div>
+          </div>
+        </div>
+      </section> {% endcomment %}
+      
+      <!-- success_section.html -->
+      
+      <section class="success-section" id="surgery-stats">
+        <div class="success-container">
+      
+          <!-- Left: Success Count -->
+          <div class="success-box">
+            <h2 class="success-count" data-target="1250">1,250+</h2>
+            <p class="success-label">Successful Surgeries</p>
+          </div>
+      
+          <!-- Right: Description -->
+          <div class="success-description">
+            <p>
+              At Donora, every successful surgery marks a new beginning — a second chance at life.
+              Through the dedication of our skilled medical teams and the generosity of organ donors,
+              we have facilitated over 1,250 life-saving transplant surgeries. Each one represents
+              a powerful story of hope, resilience, and humanity. Our mission continues with every
+              heartbeat, every breath, and every life renewed through the gift of donation.
+            </p>
+          </div>
+      
+        </div>
+      </section>
+      
+      <section class="success-stories-section">
+  <div class="container">
+    <h2>Success Stories</h2>
+    <p class="subtitle">Real stories of hope, generosity, and life-saving gifts.</p>
+
+    <!-- Story 1 -->
+    <div class="story-row">
+      <div class="story-image">
+       <img src="{% static 'images/ramesh.jpg' %}" alt="Rajesh Story">
+      </div>
+      <div class="story-text">
+        <h3>Ramesh – The Gift of a Second Life</h3>
+        <p>Ramesh, a 42-year-old school teacher, decided to donate one of his kidneys to save the life of his childhood friend, Suresh, who had been battling kidney failure for years. After a successful transplant surgery, Suresh regained his health and returned to his normal life. Ramesh says, “Seeing Suresh healthy again is the biggest reward I could ever ask for.” Their story has inspired many in their village to come forward and register as organ donors.</p>
+      </div>
+    </div>
+
+    <!-- Story 2 -->
+    <div class="story-row reverse">
+      <div class="story-image">
+        <img src="{% static 'images/meera.png' %}" alt="Meera Story">
+      </div>
+      <div class="story-text">
+        <h3>Pooja – A Second Chance at Confidence</h3>
+        <p>Pooja, a 28-year-old artist, suffered severe burns in a kitchen accident that left her with deep scars and limited movement in her right arm. She underwent multiple surgeries, but her healing remained incomplete. Thanks to a skin donation from an anonymous donor, doctors were able to perform a successful graft that restored not only her skin but also her confidence. Today, Pooja has returned to painting and often shares her journey to encourage others to consider skin donation, calling it “a gift that heals both body and soul.”
+
+</p>
+      </div>
+    </div>
+
+    <!-- Story 3 -->
+    <div class="story-row">
+      <div class="story-image">
+       <img src="{% static 'images/anita.jpg' %}" alt="Anita Story">
+      </div>
+      <div class="story-text">
+        <h3>Sandeep – Sharing Life in More Ways Than One</h3>
+        <p>Sandeep, a 36-year-old fitness coach, became a living donor when he gave a part of his liver to his cousin, Arjun, who was battling acute liver failure. The surgery was a success, and within months, Arjun was back to living a healthy, active life. But Sandeep’s generosity didn’t stop there. A year later, he also became a skin donor, contributing a small section of healthy skin to help a young burn survivor, Ritu, recover after a workplace accident. Today, Sandeep continues his coaching career while spreading awareness about living organ and tissue donation. “Giving a part of yourself is the most powerful way to change someone’s life,” he says.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <script>
+        function animateCountUp(el, target) {
+          let start = 0;
+          const duration = 2000;
+          const stepTime = Math.abs(Math.floor(duration / target));
+      
+          const counter = setInterval(() => {
+            start += 1;
+            el.textContent = start;
+            if (start >= target) {
+              el.textContent = target + "+";
+              clearInterval(counter);
+            }
+          }, stepTime);
+        }
+      
+        function handleScrollAnimation() {
+          const stat = document.querySelector(".success-count");
+          const target = +stat.getAttribute("data-target");
+          const section = document.getElementById("surgery-stats");
+          const sectionTop = section.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+      
+          if (sectionTop < windowHeight - 100 && !stat.classList.contains("counted")) {
+            stat.classList.add("counted");
+            animateCountUp(stat, target);
+          }
+        }
+      
+        window.addEventListener("scroll", handleScrollAnimation);
+      </script>
+<footer>
+  <div class="footer-top">
+    <div class="footer-about">
+      <img src="{% static 'images/removed.png' %}" alt="Logo">
+      <p>Donora is dedicated to saving lives through living organ donation awareness, kindness, and collective action. Together, we give the gift of life.</p>
+    </div>
+    <div class="footer-nav-blocks">
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+          <li><a href="{% url 'contactus' %}">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-get-involved">
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="{% url 'signup' %}">Become a Donor</a></li>
+          <li><a href="{% url 'signup' %}">Become a Recipient</a></li>
+        </ul>
+      </div>
+      <div class="footer-terms">
+        <h4>Terms & Conditions</h4>
+        <ul>
+          <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+          <li><a href="{% url 'terms_of_use' %}">Terms of Use</a></li>
+          <li><a href="{% url 'security' %}">Security</a></li>
+          <li><a href="{% url 'other_policies' %}">Other Policies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+       <p> <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;">123 Donora Lane, Pune, India</a></p>
+     <p>info@donora.ngo</p>
+      <p>+91 123 456 7890</p>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <div class="social-heading">
+        <hr class="line">
+        <span>Connect With Us</span>
+        <hr class="line">
+      </div>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" title="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"></path></svg></a>
+        <a href="https://x.com" target="_blank" title="X"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H21L14.19 10.59 22.24 21H16.16L11.13 14.43 5.5 21H2L9.13 13.01 1.36 3H7.61L12.22 9.03 17.53 3ZM16.37 19H18.09L7.7 5H5.87L16.37 19Z"/></svg></a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:block; margin:auto;">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#14484a"/>
+            <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-7.92a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z" fill="#fff"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>
+          </svg>
+        </a>
+        <a href="mailto:info@donora.org" title="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.015 6.24A2.25 2.25 0 0 1 2.25 3.75h19.5a2.25 2.25 0 0 1 2.235 2.49L12 13.065zm11.985-6.825v11.82a2.25 2.25 0 0 1-2.25 2.25H2.25a2.25 2.25 0 0 1-2.25-2.25V6.24l11.985 6.825L23.985 6.24z"></path></svg></a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 Donora Foundation | All Rights Reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('nav-menu').classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>
+    

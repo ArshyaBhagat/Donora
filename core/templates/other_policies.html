@@ -1,0 +1,791 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Other Policies – Donora</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    /* --- Professional Other Policies Styles --- */
+.header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      margin-left: auto;
+      text-align: right;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+    }
+
+
+
+    body {
+      background: linear-gradient(135deg, #f8fbff 0%, #e8f4f8 100%);
+      font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #1a365d;
+      line-height: 1.6;
+    }
+
+    /* Main Content Container */
+    .other-policies-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* Professional Title Section */
+    .other-policies-title-section {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, #2d3748 0%, #1a365d 100%);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .other-policies-title-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .other-policies-title-section h1 {
+      color: #ffffff;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .other-policies-subtitle {
+      color: #cbd5e0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Last Updated Badge */
+    .last-updated {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-top: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Content Grid */
+    .other-policies-content {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    /* Table of Contents */
+    .other-policies-toc {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .other-policies-toc h3 {
+      color: #2d3748;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0 0 20px 0;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .other-policies-toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .other-policies-toc li {
+      margin-bottom: 12px;
+    }
+
+    .other-policies-toc a {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: block;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .other-policies-toc a:hover {
+      background: #f7fafc;
+      color: #2b6cb0;
+      border-left-color: #2b6cb0;
+      transform: translateX(4px);
+    }
+
+    /* Main Content Area */
+    .other-policies-sections {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    /* Individual Sections */
+    .other-policies-section {
+      padding: 40px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .other-policies-section:last-child {
+      border-bottom: none;
+    }
+
+    .other-policies-section h2 {
+      color: #2d3748;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0 0 24px 0;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #3182ce;
+      position: relative;
+      scroll-margin-top: 120px;
+    }
+
+    .other-policies-section h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #3182ce, #63b3ed);
+      border-radius: 2px;
+    }
+
+    .other-policies-section p {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .other-policies-section ul {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+
+    .other-policies-section li {
+      margin-bottom: 8px;
+    }
+
+    /* Highlight Boxes */
+    .highlight-box {
+      background: linear-gradient(135deg, #ebf8ff 0%, #f0fff4 100%);
+      border: 1px solid #bee3f8;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border-left: 4px solid #3182ce;
+    }
+
+    .highlight-box h4 {
+      color: #2c5282;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      color: #2d3748;
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+      border: 1px solid #9ae6b4;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border-left: 4px solid #38a169;
+    }
+
+    .info-box h4 {
+      color: #2f855a;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .info-box p {
+      margin: 0;
+      color: #2d3748;
+    }
+
+    /* Contact Information */
+    .contact-info {
+      background: #f7fafc;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      border: 1px solid #e2e8f0;
+    }
+
+    .contact-info h4 {
+      color: #2d3748;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+    }
+
+    .contact-info a {
+      color: #3182ce;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .feature-item {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    .feature-item h5 {
+      color: #2d3748;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    .feature-item p {
+      color: #4a5568;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .other-policies-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .other-policies-toc {
+        position: static;
+        order: -1;
+      }
+
+      .other-policies-toc ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .other-policies-toc li {
+        margin-bottom: 0;
+      }
+
+      .other-policies-toc a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .other-policies-main {
+        padding: 20px 16px 40px;
+      }
+
+      .other-policies-title-section {
+        padding: 40px 24px;
+        margin-bottom: 40px;
+      }
+
+      .other-policies-title-section h1 {
+        font-size: 2.5rem;
+      }
+
+      .other-policies-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .other-policies-section {
+        padding: 24px;
+      }
+
+      .other-policies-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .other-policies-section p,
+      .other-policies-section ul {
+        font-size: 1rem;
+      }
+
+      .other-policies-toc {
+        padding: 20px;
+      }
+
+      .other-policies-toc h3 {
+        font-size: 1.1rem;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .other-policies-title-section h1 {
+        font-size: 2rem;
+      }
+
+      .other-policies-section {
+        padding: 20px;
+      }
+
+      .highlight-box,
+      .info-box,
+      .contact-info {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+{% comment %} <body>
+<div style="overflow: hidden;">
+<header class="site-header">
+  <div class="logo"><img src="{% static 'images/logo.png' %}" alt="Logo"></div>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <nav id="nav-menu">
+    <ul>
+      <li><a href="{% url 'home_page' %}">Home</a></li>
+      <li><a href="{% url 'aboutus' %}">About Us</a></li>
+      <li><a href="{% url 'organ' %}">Organs</a></li>
+      <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+      <li><a href="../9contact/contact.html">Contact Us</a></li>
+      <li><a href="{% url 'signup'%}" class="btn">Sign Up</a></li>
+      <li><a href="{% url 'login'%}" class="btn">Login</a></li>
+    </ul>
+  </nav>
+</header> {% endcomment %}
+<body>
+        <div style="overflow: hidden;">
+            <header class="site-header">
+              {% include 'header.html' %}
+            </header>
+
+<main class="other-policies-main">
+  <!-- Title Section -->
+  <section class="other-policies-title-section">
+    <h1>Other Policies</h1>
+    <p class="other-policies-subtitle">Additional policies and guidelines for comprehensive platform governance</p>
+    <div class="last-updated">Last updated: July 2025</div>
+  </section>
+
+  <!-- Content Grid -->
+  <div class="other-policies-content">
+    <!-- Table of Contents -->
+    <aside class="other-policies-toc">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#overview">Policy Overview</a></li>
+        <li><a href="#refund">Refund Policy</a></li>
+        <li><a href="#transparency">Transparency Standards</a></li>
+        <li><a href="#accessibility">Accessibility Commitment</a></li>
+        <li><a href="#compliance">Compliance & Reporting</a></li>
+        <li><a href="#compatibility">Device Compatibility</a></li>
+        <li><a href="#quality">Quality Assurance</a></li>
+        <li><a href="#contact">Contact Information</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="other-policies-sections">
+      <!-- Policy Overview -->
+      <section  class="other-policies-section">
+        <h2 id="overview">Policy Overview</h2>
+        <p>This section encompasses additional policies and guidelines that complement our core Privacy Policy and Terms of Use. These policies ensure comprehensive governance of our platform while maintaining our commitment to transparency, accessibility, and ethical organ donation practices.</p>
+        
+        <div class="highlight-box">
+          <h4>Comprehensive Coverage</h4>
+          <p>These policies cover areas including refunds, transparency standards, accessibility commitments, compliance procedures, and technical compatibility to ensure a complete framework for our services.</p>
+        </div>
+
+        <p>All policies outlined here are designed to support our mission of facilitating life-saving organ donations while maintaining the highest standards of service, ethics, and user experience.</p>
+      </section>
+
+      <!-- Refund Policy -->
+      <section  class="other-policies-section">
+        <h2 id="refund">Refund Policy</h2>
+        <p>Donora operates as a non-commercial, humanitarian platform dedicated to facilitating organ donation without any financial transactions between users and our organization.</p>
+        
+        <div class="info-box">
+          <h4>Free Service Model</h4>
+          <p>Since all Donora services are provided completely free of charge, there are no payments to process and therefore no refunds to issue.</p>
+        </div>
+
+        <h4>What This Means:</h4>
+        <ul>
+          <li>No registration fees or membership costs</li>
+          <li>No charges for medical coordination services</li>
+          <li>No fees for platform access or usage</li>
+          <li>No hidden costs or surprise charges</li>
+          <li>No payment processing or financial transactions</li>
+        </ul>
+
+        <p>Our commitment to free services ensures that organ donation remains accessible to all individuals regardless of their economic circumstances, maintaining the altruistic nature of this life-saving process.</p>
+
+        <div class="contact-info">
+          <h4>Questions About Costs</h4>
+          <p>If you encounter any requests for payment or have questions about our free service model, please contact us immediately at:</p>
+          <p><a href="mailto:info@donora.ngo">info@donora.ngo</a></p>
+        </div>
+      </section>
+
+      <!-- Transparency Standards -->
+      <section  class="other-policies-section">
+        <h2 id="transparency">Transparency in Donor-Recipient Matching</h2>
+        <p>Transparency is fundamental to maintaining trust and ensuring ethical practices in our organ donation matching process.</p>
+        
+        <h4>Our Matching Criteria:</h4>
+        <ul>
+          <li><strong>Medical Compatibility:</strong> Blood group compatibility</li>
+          <li><strong>Availability:</strong> Donor availability and readiness for procedures</li>
+        </ul>
+
+        <div class="highlight-box">
+          <h4>Fair and Ethical Process</h4>
+          <p>All matches are based strictly on verified medical criteria and established protocols, ensuring a fair and ethical process for every donor and recipient without bias or discrimination.</p>
+        </div>
+
+        <h4>What We Don't Consider:</h4>
+        <ul>
+          <li>Economic status or financial capacity</li>
+          <li>Social status or personal connections</li>
+          <li>Religious or cultural background</li>
+          <li>Political affiliations or beliefs</li>
+          <li>Personal preferences unrelated to medical needs</li>
+        </ul>
+
+        <p>Our matching algorithm is regularly audited by medical professionals to ensure it maintains the highest standards of fairness and medical appropriateness.</p>
+      </section>
+
+      <!-- Accessibility Commitment -->
+      <section  class="other-policies-section">
+        <h2 id="accessibility">Accessibility Commitment</h2>
+        <p>Donora is committed to providing an accessible platform that serves users of all abilities, ensuring that life-saving organ donation services are available to everyone.</p>
+        
+        <div class="feature-grid">
+          <div class="feature-item">
+            <h5>Fully Responsive Website</h5>
+            <p>Adapts seamlessly to all screen sizes and devices</p>
+          </div>
+          <div class="feature-item">
+            <h5>Alt Text Images</h5>
+            <p>Descriptive alternative text for all images and graphics</p>
+          </div>
+          <div class="feature-item">
+            <h5>Simple Interface</h5>
+            <p>Clean, intuitive design that's easy to navigate</p>
+          </div>
+        </div>
+
+        <h4>Accessibility Features:</h4>
+        <ul>
+          <li>High contrast color schemes for better visibility</li>
+          <li>Scalable text that can be enlarged without losing functionality</li>
+          <li>Clear, simple language in all communications</li>
+          <li>Consistent navigation structure throughout the platform</li>
+          <li>Form labels and instructions that are clearly associated</li>
+          <li>Error messages that are descriptive and helpful</li>
+        </ul>
+
+        <div class="info-box">
+          <h4>Continuous Improvement</h4>
+          <p>We regularly review and improve our accessibility features based on user feedback and evolving accessibility standards.</p>
+        </div>
+
+        <div class="contact-info">
+          <h4>Accessibility Support</h4>
+          <p>If you encounter accessibility barriers or need assistance, please contact our accessibility team:</p>
+          <p><a href="mailto:info@donora.ngo">info@donora.ngo</a></p>
+        </div>
+      </section>
+
+      <!-- Compliance & Reporting -->
+      <section  class="other-policies-section">
+        <h2 id="compliance">Compliance & Reporting</h2>
+        <p>Donora maintains strict compliance with all applicable laws, regulations, and ethical standards governing organ donation and healthcare services.</p>
+        
+        <h4>Regulatory Compliance:</h4>
+        <ul>
+          <li>Transplantation of Human Organs Act, 1994 (India)</li>
+          <li>Medical ethics and patient confidentiality standards</li>
+          <li>Data protection and privacy regulations</li>
+          <li>Healthcare service delivery standards</li>
+          <li>Non-profit organization governance requirements</li>
+        </ul>
+
+        <div class="highlight-box">
+          <h4>Reporting Violations</h4>
+          <p>If you believe Donora has violated any policies, laws, or ethical standards, we encourage you to report your concerns to us immediately.</p>
+        </div>
+
+        <h4>How to Report Issues:</h4>
+        <ul>
+          <li><strong>General Contact:</strong> <a href="mailto:info@donora.ngo">info@donora.ngo</a></li>
+          <li><strong>Phone:</strong> +91 123 456 7890</li>
+          <li><strong>Written Report:</strong> 123 Donora Lane, Pune, Maharashtra, India</li>
+        </ul>
+
+        <h4>Our Response Process:</h4>
+        <ul>
+          <li>Acknowledgment of your report within 24 hours</li>
+          <li>Initial investigation within 48 hours</li>
+          <li>Detailed review and response within 7 business days</li>
+          <li>Implementation of corrective measures if needed</li>
+          <li>Follow-up communication on resolution status</li>
+        </ul>
+
+        <p>We take all compliance concerns seriously and are committed to maintaining the highest standards of ethical operation in our life-saving mission.</p>
+      </section>
+
+      <!-- Device Compatibility -->
+      <section  class="other-policies-section">
+        <h2 id="compatibility">Cross-Device Compatibility</h2>
+        <p>Donora is designed to work seamlessly across all devices and platforms, ensuring that users can access our life-saving services regardless of their technology preferences.</p>
+        
+        <div class="feature-grid">
+          <div class="feature-item">
+            <h5>Mobile Devices</h5>
+            <p>Optimized for smartphones and tablets with touch-friendly interfaces</p>
+          </div>
+          <div class="feature-item">
+            <h5>Desktop Computers</h5>
+            <p>Full functionality on Windows, Mac, and Linux systems</p>
+          </div>
+          <div class="feature-item">
+            <h5>Web Browsers</h5>
+            <p>Compatible with Chrome, Firefox, Safari, Edge, and other modern browsers</p>
+          </div>
+          <div class="feature-item">
+            <h5>Operating Systems</h5>
+            <p>Works on iOS, Android, Windows, macOS, and Linux</p>
+          </div>
+        </div>
+
+        <h4>Technical Features:</h4>
+        <ul>
+          <li>Responsive design that adapts to any screen size</li>
+          <li>Fast loading times on all connection speeds</li>
+          <li>Secure connections across all platforms</li>
+          <li>Regular updates for optimal performance</li>
+        </ul>
+
+        <div class="info-box">
+          <h4>Easy Navigation</h4>
+          <p>Our platform provides consistent, intuitive navigation whether you're using a smartphone, tablet, or computer, with keyboard support for accessibility.</p>
+        </div>
+
+        <p>We continuously test and optimize our platform across different devices and browsers to ensure a reliable, consistent experience for all users.</p>
+      </section>
+
+      <!-- Quality Assurance -->
+      <section  class="other-policies-section">
+        <h2 id="quality">Quality Assurance</h2>
+        <p>Donora maintains rigorous quality assurance standards to ensure the reliability, safety, and effectiveness of our organ donation services.</p>
+        
+        <h4>Quality Standards:</h4>
+        <ul>
+          <li>Regular platform testing and security audits</li>
+          <li>Medical protocol verification with healthcare professionals</li>
+          <li>User experience testing and feedback integration</li>
+          <li>Data accuracy and integrity monitoring</li>
+          <li>Performance optimization and reliability testing</li>
+        </ul>
+
+        <div class="highlight-box">
+          <h4>Continuous Improvement</h4>
+          <p>We continuously monitor, evaluate, and improve our services based on user feedback, medical best practices, and technological advances.</p>
+        </div>
+
+        <h4>Feedback and Improvement:</h4>
+        <ul>
+          <li>Regular user satisfaction surveys</li>
+          <li>Medical professional consultations</li>
+          <li>Technical performance monitoring</li>
+          <li>Security and privacy assessments</li>
+          <li>Accessibility and usability reviews</li>
+        </ul>
+
+        <p>Your feedback is invaluable in helping us maintain and improve the quality of our life-saving services.</p>
+      </section>
+
+      <!-- Contact Information -->
+      <section  class="other-policies-section">
+        <h2 id="contact">Contact Information</h2>
+        <p>For questions, concerns, or assistance related to any of these policies, please don't hesitate to contact us using the appropriate channel below.</p>
+        
+        <div class="contact-info">
+          <h4>Policy-Specific Contacts</h4>
+          <p><strong>General Inquiries:</strong> <a href="mailto:info@donora.ngo">info@donora.ngo</a></p>
+        </div>
+
+        <div class="contact-info">
+          <h4>Main Office</h4>
+          <p><strong>Address:</strong> 123 Donora Lane, Pune, Maharashtra, India</p>
+          <p><strong>Phone:</strong> +91 123 456 7890</p>
+          <p><strong>Office Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM IST</p>
+        </div>
+
+        <p>We are committed to responding to all inquiries promptly and providing the support you need to participate in our life-saving organ donation services.</p>
+
+        <div class="highlight-box">
+          <h4>Emergency Medical Situations</h4>
+          <p>For medical emergencies, contact SaveLife Hospital directly or call emergency services (108). Our policy support team is not equipped to handle medical emergencies.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-about">
+      <img src="{% static 'images/removed.png' %}" alt="Logo">
+      <p>Donora is dedicated to saving lives through living organ donation awareness, kindness, and collective action. Together, we give the gift of life.</p>
+    </div>
+    <div class="footer-nav-blocks">
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+          <li><a href="{% url 'contactus' %}">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-get-involved">
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="{% url 'signup' %}">Become a Donor</a></li>
+          <li><a href="{% url 'signup' %}">Become a Recipient</a></li>
+        </ul>
+      </div>
+      <div class="footer-terms">
+        <h4>Terms & Conditions</h4>
+        <ul>
+          <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+          <li><a href="{% url 'terms_of_use' %}">Terms of Use</a></li>
+          <li><a href="{% url 'security' %}">Security</a></li>
+          <li><a href="{% url 'other_policies' %}">Other Policies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+      <p> <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;">123 Donora Lane, Pune, India</a></p>
+      <p>info@donora.ngo</p>
+      <p>+91 123 456 7890</p>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <div class="social-heading">
+        <hr class="line">
+        <span>Connect With Us</span>
+        <hr class="line">
+      </div>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" title="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"></path></svg></a>
+        <a href="https://x.com" target="_blank" title="X"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H21L14.19 10.59 22.24 21H16.16L11.13 14.43 5.5 21H2L9.13 13.01 1.36 3H7.61L12.22 9.03 17.53 3ZM16.37 19H18.09L7.7 5H5.87L16.37 19Z"/></svg></a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:block; margin:auto;">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#14484a"/>
+            <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-7.92a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z" fill="#fff"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>
+          </svg>
+        </a>
+        <a href="mailto:info@donora.org" title="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.015 6.24A2.25 2.25 0 0 1 2.25 3.75h19.5a2.25 2.25 0 0 1 2.235 2.49L12 13.065zm11.985-6.825v11.82a2.25 2.25 0 0 1-2.25 2.25H2.25a2.25 2.25 0 0 1-2.25-2.25V6.24l11.985 6.825L23.985 6.24z"></path></svg></a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 Donora Foundation | All Rights Reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('nav-menu').classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>

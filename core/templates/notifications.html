@@ -1,0 +1,316 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Notifications - Donora</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .header { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .header-left { display: flex; align-items: center; }
+        nav { margin-left: auto; text-align: right; flex: 1; display: flex; justify-content: flex-end; }
+        nav ul { display: flex; align-items: center; gap: 1.5rem; justify-content: flex-end; margin: 0; padding: 0; list-style: none; width: 100%; }
+        body { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(135deg, #d0f0f5 0%, #f0fbfb 100%); overflow-x: hidden; }
+        .notifications-container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .notifications-header { background: #caf3f3; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); text-align: center; margin-bottom: 30px; }
+        .notifications-header h1 { font-size: 36px; color: #205072; margin-bottom: 10px; letter-spacing: 1px; }
+        .notifications-header p { font-size: 18px; color: #333; margin: 0; }
+        .notification-card { background: #b5dbe7; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 4px solid #329D9C; transition: transform 0.2s ease; }
+        .notification-card:hover { transform: translateY(-2px); }
+        .notification-icon { display: inline-block; font-size: 24px; margin-right: 15px; vertical-align: middle; }
+        .notification-content { display: inline-block; vertical-align: middle; width: calc(100% - 50px); }
+        .notification-title { font-size: 18px; font-weight: bold; color: #205072; margin-bottom: 5px; }
+        .notification-message { font-size: 16px; color: #333; line-height: 1.5; margin-bottom: 8px; }
+        .notification-time { font-size: 14px; color: #666; font-style: italic; }
+        .no-notifications { text-align: center; padding: 60px 20px; background: #f8f9fa; border-radius: 12px; border: 2px dashed #ccc; }
+        .no-notifications-icon { font-size: 48px; margin-bottom: 20px; opacity: 0.5; }
+        .no-notifications h3 { font-size: 24px; color: #666; margin-bottom: 10px; }
+        .no-notifications p { font-size: 16px; color: #888; }
+        .cancel-btn, .reapply-btn {
+            background: linear-gradient(90deg, #f87171 60%, #e11d48 100%);
+            color: white; border: none; border-radius: 8px; padding: 10px 22px;
+            font-size: 1rem; font-weight: bold; margin-top: 8px; cursor: pointer;
+            transition: background 0.2s;
+        }
+        .cancel-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+        .cancel-note, .reapply-note { font-size: 15px; color: #8b4141; margin-bottom: 5px; font-weight: 500;}
+        .reapply-btn { background: linear-gradient(90deg, #16a34a 60%, #22c55e 100%); margin-left: 12px;}
+        @media (max-width: 768px) {
+            .notifications-container { padding: 0 15px; }
+            .notifications-header h1 { font-size: 28px; }
+            .notification-card { padding: 20px; }
+            .notification-content { width: calc(100% - 40px); }
+        }
+    </style>
+</head>
+<body>
+    <div style="overflow: hidden;">
+        <header class="site-header">
+            {% include 'header.html' %}
+        </header>
+        <div class="notifications-container">
+            <div class="notifications-header">
+                <h1>Notifications</h1>
+                <p>Hi {{ user.username }}, all your notifications will be shown here</p>
+            </div>
+
+            <!-- SHOW ALL UNREAD NOTIFICATIONS with reapply button if needed -->
+           {% if user_notifications %}
+    {% for notification in user_notifications %}
+        {% if notification.notif_type == 'match' %}
+            <!-- Match notification with green/success styling -->
+            <div class="notification-card" style="border-left: 4px solid #16a34a;background:#d1fae5">
+                <span class="notification-icon">🎉</span>
+                <div class="notification-content">
+                    <div class="notification-title" style="color: #16a34a;">Match Found!</div>
+                    <div class="notification-message">
+                        <span style="color: #166534; font-weight: 500;">{{ notification.message|safe }}</span>
+                    </div>
+                    <div class="notification-time" style="margin-top:5px;">
+                        Received: {{ notification.created_at|date:"M d, Y" }}
+                    </div>
+                </div>
+            </div>
+        {% elif notification.notif_type == 'info' %}
+            <!-- Info notification with blue/info styling -->
+            <div class="notification-card" style="border-left: 4px solid #2563eb;background:#dbeafe">
+                <span class="notification-icon">ℹ️</span>
+                <div class="notification-content">
+                    <div class="notification-title" style="color: #2563eb;">Information</div>
+                    <div class="notification-message">
+                        <span style="color: #1e40af; font-weight: 500;">{{ notification.message|safe }}</span>
+                    </div>
+                    <div class="notification-time" style="margin-top:5px;">
+                        Received: {{ notification.created_at|date:"M d, Y" }}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <!-- Other notifications (reapply, etc.) with red/warning styling -->
+            <div class="notification-card" style="border-left: 4px solid #b91c1c;background:#fcd1c2">
+                <span class="notification-icon">⚡</span>
+                <div class="notification-content">
+                    <div class="notification-title">Important Update</div>
+                    <div class="notification-message">
+                        <span class="reapply-note">{{ notification.message|safe }}</span>
+                    </div>
+                    <div class="notification-time" style="margin-top:5px;">
+                        Received: {{ notification.created_at|date:"M d, Y" }}
+                    </div>
+                    {% if notification.notif_type == 'reapply' %}
+                        {% if notification.donor %}
+                            <form action="{% url 'reapply_donor' notification.donor.id %}" method="post" style="margin-top:16px;">
+                                {% csrf_token %}
+                                <button type="submit" class="reapply-btn">Reapply as Donor</button>
+                            </form>
+                        {% elif notification.recipient %}
+                            <form action="{% url 'reapply_recipient' notification.recipient.id %}" method="post" style="margin-top:16px;">
+                                {% csrf_token %}
+                                <button type="submit" class="reapply-btn">Reapply as Recipient</button>
+                            </form>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+            <!-- Pending Donor Application Card (cancel button after status) -->
+            {% if pending_donor %}
+                <div class="notification-card">
+                    <span class="notification-icon">👤</span>
+                    <div class="notification-content">
+                        <div class="notification-title">Donor Application: {{ pending_donor.organ.organ_name }}</div>
+                        <div class="notification-message">
+                            <div class="cancel-note">
+                                You can cancel becoming a donor within 24 hours only.
+                                (Time left: {{ hours_left_donor }} hrs)
+                            </div>
+                            Name: <strong>{{ pending_donor.name }}</strong><br>
+                            Applied at: {{ pending_donor.created_at|date:"M d, Y" }}
+                        </div>
+                        <div class="notification-time">
+                            Status: {% if pending_donor.matched %}<b>Matched </b>{% else %}Not Matched Yet{% endif %}
+                        </div>
+                        <form action="{% url 'cancel_donor' pending_donor.id %}"
+                              method="post"
+                              style="margin-top:16px; display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="cancel-btn"
+                                    {% if hours_left_donor == 0 or pending_donor.cancelled %}
+                                        disabled
+                                    {% endif %}>
+                                Cancel Donor Application
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Pending Recipient Application Card (cancel button after status) -->
+            {% if pending_recipient %}
+                <div class="notification-card">
+                    <span class="notification-icon">💚</span>
+                    <div class="notification-content">
+                        <div class="notification-title">Recipient Application: {{ pending_recipient.organ.organ_name }}</div>
+                        <div class="notification-message">
+                            <div class="cancel-note">
+                                You can cancel becoming a recipient within 24 hours only.
+                                (Time left: {{ hours_left_recipient }} hrs)
+                            </div>
+                            Name: <strong>{{ pending_recipient.name }}</strong><br>
+                            Applied at: {{ pending_recipient.created_at|date:"M d, Y" }}
+                        </div>
+                        <div class="notification-time">
+                            Status: {% if pending_recipient.matched %}<b>Matched </b>{% else %}Not Matched Yet{% endif %}
+                        </div>
+                        <form action="{% url 'cancel_recipient' pending_recipient.id %}"
+                              method="post"
+                              style="margin-top:16px; display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="cancel-btn"
+                                    {% if hours_left_recipient == 0 or pending_recipient.cancelled %}
+                                        disabled
+                                    {% endif %}>
+                                Cancel Recipient Application
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Show Any Success/Error/Other Messages -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="notification-card" style="border-left:4px solid #22c55e;background:#e0fecf">
+                        <span class="notification-icon">ℹ️</span>
+                        <div class="notification-content notification-message">{{ message }}</div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <!-- Recent Matches History Block (unchanged) -->
+            {% if all_matches %}
+                {% for item in all_matches reversed %}
+                    <div class="notification-card">
+                        <span class="notification-icon">
+                            {% if item.role == "donor" %}👤{% else %}💚{% endif %}
+                        </span>
+                        <div class="notification-content">
+                            <div class="notification-title">
+                                {% if item.role == 'donor' %}Donation Match (Attempt {{ forloop.counter }})
+                                {% else %}Received a Donor (Attempt {{ forloop.counter }}){% endif %}
+                            </div>
+                            <div class="notification-message">
+                                Transplantation ID: <strong>{{ item.match.transplantation_id }}</strong><br>
+                                Organ: {{ item.match.organ.organ_name }}<br>
+                                Date: {{ item.match.matched_on|date:"F d, Y " }}
+                                <div style="margin-top: 1.5em; color: #555;">
+     Carry and Show Acknowledgment's print and your photo ID at the hospital desk.
+    </div>
+                                <br>
+                                <a href="{% url 'acknowledgment' item.match.transplantation_id %}" target="_blank"
+                                   class="btn btn-primary" style="display:inline-block;margin-top:10px;">
+                                   View Acknowledgment
+                                </a>
+                            </div>
+                            <div class="notification-time">Attempt {{ forloop.counter }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-notifications">
+                    <span class="no-notifications-icon">😔</span>
+                    <h3>No recent transplantation matches found.</h3>
+                    <p>All future donor/recipient attempts will be shown here.</p>
+                </div>
+            {% endif %}
+
+            <!-- Optional: System update notification -->
+            
+            <div class="notification-card">
+                <span class="notification-icon">📋</span>
+                <div class="notification-content">
+                    <div class="notification-title">System Update</div>
+                    <div class="notification-message">We've updated our privacy policy. Please review the changes.</div>
+                    <div class="notification-time">3 days ago</div>
+                </div>
+            </div>
+        
+        </div>
+        <footer>
+             <div class="footer-top">
+              <div class="footer-about">
+                <img src="{% static 'images/removed.png' %}" alt="Logo">
+                <p>Donora is dedicated to saving lives through organ donation awareness, kindness, and collective action. Together, we give the gift of life.</p>
+              </div>
+              <div class="footer-nav-blocks">
+                <div class="footer-links">
+                  <h4>Quick Links</h4>
+                  <ul>
+                    <li><a href="{% url 'aboutus' %}">About Us</a></li>
+                    <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+                    <li><a href="{% url 'contactus' %}">Contact</a></li>
+                  </ul>
+                </div>
+                <div class="footer-get-involved">
+                  <h4>Get Involved</h4>
+                  <ul>
+                    <li><a href="{% url 'signup' %}" >Become a Donor</a></li>
+                    <li><a href="{% url 'signup' %}" >Become a Recipient</a></li>
+                  </ul>
+                </div>
+                <div class="footer-terms">
+                  <h4>Terms & Conditions</h4>
+                  <ul>
+                    <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+                    <li><a href="{% url 'terms_of_use' %}">Terms of Use</a></li>
+                    <li><a href="{% url 'security' %}">Security</a></li>
+                    <li><a href="{% url 'other_policies' %}">Other Policies</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="footer-contact">
+                <h4>Contact Us</h4>
+               
+                 <p> <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;">123 Donora Lane, Pune, India</a></p>
+                <p>+91 123 456 7890</p>
+              </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+              <div class="footer-social">
+                <div class="social-heading">
+                  <hr class="line">
+                  <span>Connect With Us</span>
+                  <hr class="line">
+                </div>
+                <div class="social-icons">
+                  <a href="https://facebook.com" target="_blank" title="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"></path></svg></a>
+                  <a href="https://x.com" target="_blank" title="X"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H21L14.19 10.59 22.24 21H16.16L11.13 14.43 5.5 21H2L9.13 13.01 1.36 3H7.61L12.22 9.03 17.53 3ZM16.37 19H18.09L7.7 5H5.87L16.37 19Z"/></svg></a>
+                  <a href="https://instagram.com" target="_blank" title="Instagram">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:block; margin:auto;">
+                      <rect x="2" y="2" width="20" height="20" rx="5" fill="#14484a"/>
+                      <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-7.92a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z" fill="#fff"/>
+                      <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>
+                    </svg>
+                  </a>
+                  <a href="mailto:info@donora.org" title="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.015 6.24A2.25 2.25 0 0 1 2.25 3.75h19.5a2.25 2.25 0 0 1 2.235 2.49L12 13.065zm11.985-6.825v11.82a2.25 2.25 0 0 1-2.25 2.25H2.25a2.25 2.25 0 0 1-2.25-2.25V6.24l11.985 6.825L23.985 6.24z"></path></svg></a>
+                </div>
+              </div>
+              <div class="footer-copy">
+                <p>&copy; 2025 Donora Foundation | All Rights Reserved</p>
+              </div>
+            </div>
+        </footer>
+        <script>
+            function toggleMenu() {
+                document.getElementById('nav-menu').classList.toggle('active');
+            }
+        </script>
+    </div>
+</body>
+</html>

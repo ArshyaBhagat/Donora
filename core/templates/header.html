@@ -1,0 +1,136 @@
+
+{% load static %}
+<style>
+  /* Ensure dropdown is not clipped */
+  .site-header, header {
+    overflow: visible !important;
+  }
+  nav, nav ul, nav ul li {
+    overflow: visible !important;
+  }
+  #avatarDropdown {
+    position: absolute !important;
+    z-index: 9999 !important;
+  }
+
+  #avatarDropdown a{
+    text-align: center;
+  }
+
+  .notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -15px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+    border: 1px solid #fff;
+    z-index: 10;
+  }
+</style>
+<div class="header">
+  <div class="header-left">
+    <div class="logo">
+      <img src="{% static 'images/logo.png' %}" alt="Logo">
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  </div>
+  <nav id="nav-menu">
+    <ul>
+      <li><a href="{% url 'home_page' %}">Home</a></li>
+      <li><a href="{% url 'aboutus' %}">About Us</a></li>
+      <li><a href="{% url 'organ' %}">Organs</a></li>
+      <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+      <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+      {% if user.is_authenticated %}
+        <li style="position: relative;">
+          <!-- Notification Icon -->
+          <a href="{% url 'notifications' %}" style="margin-right: 1.5rem; cursor: pointer; font-size: 22px; vertical-align: middle; text-decoration: none; position: relative;">
+            🔔
+            {% if unread_count > 0 %}
+            <span class="notification-badge">{{ unread_count }}</span>
+            {% endif %}
+          </a>
+          <!-- Avatar Dropdown -->
+          <div id="avatarDropdownContainer" style="display: inline-block; position: relative;">
+            <img src="{% static 'images/avatar.png' %}" alt="Avatar" id="avatarImg" style="width: 38px; height: 38px; border-radius: 50%; cursor: pointer; vertical-align: middle; border: 2px solid #205072;">
+            <div id="avatarDropdown" style="display: none; position: absolute; right: 0; top: 48px; background: white; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 10px; min-width: 180px; z-index: 9999;">
+              <div style="padding: 1rem; border-bottom: 1px solid #eee; text-align: center;">
+                <strong>{{ user.username }}</strong>
+              </div>
+              {% comment %} <a href="{% url 'dashboard' %}" style="display: block; padding: 0.75rem; color: #205072; text-decoration: none; border-bottom: 1px solid #eee;">Dashboard</a> {% endcomment %}
+              <form method="post" action="{% url 'logout' %}" style="margin: 0;">
+                {% csrf_token %}
+                <button type="submit" style="width: 100%; padding: 0.75rem; background: #205072; color: white; border: none; border-radius: 0 0 10px 10px; font-size: 16px; cursor: pointer;">Log out</button>
+              </form>
+            </div>
+          </div>
+        </li>
+      {% else %}
+        <li><a href="{% url 'signup'%}" class="btn">Sign Up</a></li>
+        <li><a href="{% url 'login'%}" class="btn">Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+<script>
+  // Avatar dropdown logic
+  document.addEventListener('DOMContentLoaded', function() {
+    var avatarImg = document.getElementById('avatarImg');
+    var dropdown = document.getElementById('avatarDropdown');
+    
+    console.log('Avatar dropdown script loaded');
+    console.log('Avatar image found:', avatarImg);
+    console.log('Dropdown found:', dropdown);
+    
+    if (avatarImg && dropdown) {
+      console.log('Setting up dropdown event listeners');
+      
+      // Toggle dropdown on avatar click
+      avatarImg.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log('Avatar clicked, current display:', dropdown.style.display);
+        
+        // Close dropdown if it's open, open if it's closed
+        if (dropdown.style.display === 'block') {
+          dropdown.style.display = 'none';
+          console.log('Dropdown closed');
+        } else {
+          dropdown.style.display = 'block';
+          console.log('Dropdown opened');
+        }
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!avatarImg.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.style.display = 'none';
+          console.log('Dropdown closed by outside click');
+        }
+      });
+      
+      // Prevent dropdown from closing when clicking inside it
+      dropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+        console.log('Dropdown clicked, preventing close');
+      });
+    } else {
+      console.log('Avatar or dropdown element not found!');
+    }
+  });
+
+  // Menu toggle function for mobile
+  function toggleMenu() {
+    var navMenu = document.getElementById('nav-menu');
+    if (navMenu) {
+      navMenu.classList.toggle('active');
+    }
+  }
+</script>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin SPA - Donora</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <style>
+    /* Minimal styling for layout; relies on existing global CSS */
+    .layout { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+    .sidebar { background: #0f172a; color: #fff; padding: 1rem; }
+    .sidebar a { color: #cbd5e1; display: block; padding: .5rem 0; text-decoration: none; }
+    .sidebar a.active { color: #fff; font-weight: 600; }
+    .content { padding: 1rem; }
+    .toolbar { display:flex; gap:.5rem; align-items:center; margin-bottom: 1rem; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:.5rem; padding:1rem; margin-bottom:1rem; }
+    table { width:100%; border-collapse: collapse; }
+    th, td { border:1px solid #e5e7eb; padding:.5rem; text-align:left; }
+    th { background:#f8fafc; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Admin</h2>
+      <nav>
+        <a href="#dashboard" data-view="dashboard" class="active">Dashboard</a>
+        <a href="#donors" data-view="donors">Donors</a>
+        <a href="#recipients" data-view="recipients">Recipients</a>
+        <a href="#matches" data-view="matches">Matched</a>
+        <a href="#reports" data-view="reports">Reports</a>
+      </nav>
+      <hr />
+      <div>
+        <small>CSV Exports</small>
+        <a id="link-csv-donors" href="reports/donors.csv">Donors CSV</a>
+        <a id="link-csv-recipients" href="reports/recipients.csv">Recipients CSV</a>
+        <a id="link-csv-matches" href="reports/matches.csv">Matches CSV</a>
+        <hr />
+        <small>PDF Exports</small>
+        <a id="link-pdf-donors" href="reports/donors.pdf">Donors PDF</a>
+        <a id="link-pdf-recipients" href="reports/recipients.pdf">Recipients PDF</a>
+        <a id="link-pdf-matches" href="reports/matches.pdf">Matches PDF</a>
+      </div>
+    </aside>
+    <main class="content">
+      <section id="view-dashboard" class="card">
+        <h3>Dashboard</h3>
+        <div class="toolbar">
+          <label>Start <input type="date" id="date-start" /></label>
+          <label>End <input type="date" id="date-end" /></label>
+          <button id="refresh-dashboard">Refresh</button>
+        </div>
+        <div id="stats">
+          <div>Total Donors: <strong id="stat-donors">-</strong></div>
+          <div>Total Recipients: <strong id="stat-recipients">-</strong></div>
+          <div>Total Matches: <strong id="stat-matches">-</strong></div>
+        </div>
+      </section>
+
+      <section id="view-donors" class="card hidden">
+        <h3>Donors</h3>
+        <div class="toolbar">
+          <label>Start <input type="date" class="date-start" /></label>
+          <label>End <input type="date" class="date-end" /></label>
+          <button data-export="donors">Download CSV</button>
+          <button data-export-pdf="donors">Download PDF</button>
+          <button data-refresh="donors">Refresh</button>
+        </div>
+        <table id="table-donors">
+          <thead>
+            <tr>
+              <th>ID</th><th>Name</th><th>Age</th><th>Blood Group</th><th>Organ</th><th>Contact</th><th>Matched</th><th>Created At</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="view-recipients" class="card hidden">
+        <h3>Recipients</h3>
+        <div class="toolbar">
+          <label>Start <input type="date" class="date-start" /></label>
+          <label>End <input type="date" class="date-end" /></label>
+          <button data-export="recipients">Download CSV</button>
+          <button data-export-pdf="recipients">Download PDF</button>
+          <button data-refresh="recipients">Refresh</button>
+        </div>
+        <table id="table-recipients">
+          <thead>
+            <tr>
+              <th>ID</th><th>Name</th><th>Age</th><th>Blood Group</th><th>Organ</th><th>Contact</th><th>Matched</th><th>Created At</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="view-matches" class="card hidden">
+        <h3>Matched Transplantations</h3>
+        <div class="toolbar">
+          <label>Start <input type="date" class="date-start" /></label>
+          <label>End <input type="date" class="date-end" /></label>
+          <button data-export="matches">Download CSV</button>
+          <button data-export-pdf="matches">Download PDF</button>
+          <button data-refresh="matches">Refresh</button>
+        </div>
+        <table id="table-matches">
+          <thead>
+            <tr>
+              <th>ID</th><th>Donor</th><th>Recipient</th><th>Organ</th><th>Donor BG</th><th>Recipient BG</th><th>Matched On</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="view-reports" class="card hidden">
+        <h3>Reports</h3>
+        <p>Use the CSV links in the sidebar or buttons above each table.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Simple SPA navigation
+    const links = document.querySelectorAll('a[data-view]');
+    const sections = {
+      dashboard: document.getElementById('view-dashboard'),
+      donors: document.getElementById('view-donors'),
+      recipients: document.getElementById('view-recipients'),
+      matches: document.getElementById('view-matches'),
+      reports: document.getElementById('view-reports'),
+    };
+
+    function queryWithDates(baseUrl, container) {
+      const start = container.querySelector('.date-start')?.value || document.getElementById('date-start')?.value || '';
+      const end = container.querySelector('.date-end')?.value || document.getElementById('date-end')?.value || '';
+      const p = new URLSearchParams();
+      if (start) p.set('start', start);
+      if (end) p.set('end', end);
+      return p.toString() ? `${baseUrl}?${p.toString()}` : baseUrl;
+    }
+
+    function show(view) {
+      Object.values(sections).forEach(s => s.classList.add('hidden'));
+      sections[view].classList.remove('hidden');
+      links.forEach(a => a.classList.toggle('active', a.dataset.view === view));
+      if (view === 'dashboard') loadDashboard();
+      if (view === 'donors') loadTable('donors');
+      if (view === 'recipients') loadTable('recipients');
+      if (view === 'matches') loadTable('matches');
+    }
+
+    links.forEach(a => a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const view = a.dataset.view;
+      window.location.hash = view;
+      show(view);
+    }));
+
+    window.addEventListener('load', () => {
+      const initial = window.location.hash.replace('#', '') || 'dashboard';
+      show(initial);
+    });
+
+    // Data fetching helpers
+    async function fetchJSON(path) {
+      const res = await fetch(path, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+      if (!res.ok) throw new Error('Network error');
+      return res.json();
+    }
+
+    async function loadDashboard() {
+      try {
+        const container = document.getElementById('view-dashboard');
+        const [d, r, m] = await Promise.all([
+          fetchJSON(queryWithDates('api/donors/', container)),
+          fetchJSON(queryWithDates('api/recipients/', container)),
+          fetchJSON(queryWithDates('api/matches/', container)),
+        ]);
+        document.getElementById('stat-donors').textContent = d.results.length;
+        document.getElementById('stat-recipients').textContent = r.results.length;
+        document.getElementById('stat-matches').textContent = m.results.length;
+        updateSidebarLinks(container);
+      } catch (e) { console.error(e); }
+    }
+
+    document.getElementById('refresh-dashboard').addEventListener('click', loadDashboard);
+
+    async function loadTable(kind) {
+      const map = {
+        donors: {
+          url: 'api/donors/', table: document.querySelector('#table-donors tbody'), section: sections.donors,
+          row: i => `<tr><td>${i.id}</td><td>${i.name}</td><td>${i.age}</td><td>${i.blood_group}</td><td>${i.organ||''}</td><td>${i.contact}</td><td>${i.matched?'Yes':'No'}</td><td>${i.created_at}</td></tr>`
+        },
+        recipients: {
+          url: 'api/recipients/', table: document.querySelector('#table-recipients tbody'), section: sections.recipients,
+          row: i => `<tr><td>${i.id}</td><td>${i.name}</td><td>${i.age}</td><td>${i.blood_group}</td><td>${i.organ||''}</td><td>${i.contact}</td><td>${i.matched?'Yes':'No'}</td><td>${i.created_at}</td></tr>`
+        },
+        matches: {
+          url: 'api/matches/', table: document.querySelector('#table-matches tbody'), section: sections.matches,
+          row: i => `<tr><td>${i.transplantation_id}</td><td>${i.donor_name}</td><td>${i.recipient_name}</td><td>${i.organ||''}</td><td>${i.donor_blood_group}</td><td>${i.recipient_blood_group}</td><td>${i.matched_on}</td></tr>`
+        }
+      };
+      const cfg = map[kind];
+      try {
+        const data = await fetchJSON(queryWithDates(cfg.url, cfg.section));
+        cfg.table.innerHTML = data.results.map(cfg.row).join('');
+        updateSidebarLinks(cfg.section);
+      } catch (e) { console.error(e); }
+    }
+
+    function updateSidebarLinks(container) {
+      const setHref = (id, base) => {
+        const el = document.getElementById(id);
+        if (el) el.href = queryWithDates(base, container);
+      };
+      setHref('link-csv-donors', 'reports/donors.csv');
+      setHref('link-csv-recipients', 'reports/recipients.csv');
+      setHref('link-csv-matches', 'reports/matches.csv');
+      setHref('link-pdf-donors', 'reports/donors.pdf');
+      setHref('link-pdf-recipients', 'reports/recipients.pdf');
+      setHref('link-pdf-matches', 'reports/matches.pdf');
+    }
+
+    // CSV buttons
+    document.querySelectorAll('button[data-export]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const kind = btn.getAttribute('data-export');
+        const section = btn.closest('section');
+        const link = {
+          donors: 'reports/donors.csv',
+          recipients: 'reports/recipients.csv',
+          matches: 'reports/matches.csv',
+        }[kind];
+        window.location.href = queryWithDates(link, section);
+      });
+    });
+
+    // PDF buttons
+    document.querySelectorAll('button[data-export-pdf]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const kind = btn.getAttribute('data-export-pdf');
+        const section = btn.closest('section');
+        const link = {
+          donors: 'reports/donors.pdf',
+          recipients: 'reports/recipients.pdf',
+          matches: 'reports/matches.pdf',
+        }[kind];
+        window.location.href = queryWithDates(link, section);
+      });
+    });
+
+    // Refresh table buttons
+    document.querySelectorAll('button[data-refresh]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const kind = btn.getAttribute('data-refresh');
+        loadTable(kind);
+      });
+    });
+  </script>
+</body>
+</html>

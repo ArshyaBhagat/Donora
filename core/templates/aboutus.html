@@ -1,0 +1,574 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us – Donora</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Professional color palette and typography */
+    :root {
+      --primary-color: #1a365d;
+      --secondary-color: #2d5a87;
+      --accent-color: #3182ce;
+      --text-primary: #004E52;
+      --text-secondary: #004E52;
+      --text-light: #004E52;
+      --background-primary: #CFEDEF;
+      --background-secondary: #ffffff;
+      --background-accent: #ffffff;
+      --border-color: #e2e8f0;
+      --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-heavy: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+      background: var(--background-primary);
+      font-family: 'Inter', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* Hero section */
+    .hero-section {
+      background: var(--primary-color);
+      color: white;
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      font-weight: 400;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Main content container */
+    .about-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    /* Section styling */
+    .about-section {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      margin-bottom: 100px;
+      background: var(--background-primary);
+      border-radius: 16px;
+      padding: 60px;
+      box-shadow: var(--shadow-light);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .about-section:hover {
+      box-shadow: var(--shadow-medium);
+      transform: translateY(-2px);
+    }
+
+    .about-section.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .about-section:nth-child(even) {
+      background: var(--background-secondary);
+    }
+
+    /* Make Our Story and Quality Assurance sections white */
+    .about-section:nth-child(1),
+    .about-section:nth-child(5) {
+      background: var(--background-secondary);
+    }
+
+    /* Image styling */
+    .about-img-large {
+      flex: 0 0 450px;
+      width: 450px;
+      height: 320px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-medium);
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .about-img-large:hover {
+      transform: scale(1.02);
+    }
+
+    /* Content styling */
+    .about-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .about-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .about-subtitle {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--accent-color);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .about-desc {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+      text-align: left;
+    }
+
+    .about-desc strong {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    /* Statistics section */
+    .stats-section {
+      background: var(--primary-color);
+      color: white;
+      padding: 60px 0;
+      margin: 80px 0;
+      text-align: center;
+    }
+
+    .stats-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+    }
+
+    .stat-item {
+      padding: 20px;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #63b3ed;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Call to action section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 60px;
+      border-radius: 16px;
+      text-align: center;
+      margin: 60px auto;
+      max-width: 1200px;
+    }
+
+    .cta-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .cta-desc {
+      font-size: 1.125rem;
+      margin-bottom: 32px;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-button {
+      background: white;
+      color: var(--primary-color);
+      padding: 12px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .cta-button:hover {
+      background: transparent;
+      color: white;
+      border-color: white;
+      transform: translateY(-2px);
+    }
+
+    .cta-button.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .cta-button.secondary:hover {
+      background: white;
+      color: var(--primary-color);
+    }
+
+    /* Responsive design */
+    @media (max-width: 1024px) {
+      .about-section {
+        gap: 40px;
+        padding: 40px;
+        margin-bottom: 60px;
+      }
+      
+      .about-img-large {
+        flex: 0 0 380px;
+        width: 380px;
+        height: 280px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .about-main {
+        padding: 60px 16px;
+      }
+      
+      .about-section {
+        flex-direction: column;
+        gap: 32px;
+        padding: 32px 24px;
+        text-align: center;
+      }
+      
+      .about-section.reverse {
+        flex-direction: column;
+      }
+      
+      .about-img-large {
+        flex: none;
+        width: 100%;
+        max-width: 400px;
+        height: 250px;
+      }
+      
+      .about-title {
+        font-size: 1.875rem;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .cta-button {
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.125rem;
+      }
+      
+      .about-section {
+        padding: 24px 16px;
+      }
+      
+      .about-title {
+        font-size: 1.5rem;
+      }
+      
+      .about-desc {
+        font-size: 1rem;
+      }
+      
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      
+      .stat-number {
+        font-size: 2rem;
+      }
+    }
+
+    /* Header customization */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+        <div style="overflow: hidden;">
+            <header class="site-header">
+              {% include 'header.html' %}
+            </header>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">About Donora</h1>
+    <p class="hero-subtitle">Connecting lives through compassionate living organ donation. We bridge the gap between willing donors and patients in need, creating hope and saving lives through ethical, medically supervised transplant services.</p>
+  </div>
+</section>
+
+<main class="about-main">
+  <section class="about-section">
+    <img src="{% static 'images/about-donation.jpg' %}" alt="About Donora" class="about-img-large">
+    <div class="about-content">
+      <div class="about-subtitle">Our Story</div>
+      <div class="about-title">Born from Compassion, Built for Impact</div>
+      <div class="about-desc">
+        Donora is a technology-driven initiative designed to bridge the gap between willing living donors and patients in need of life-saving transplants. We connect people in need of kidney, liver, skin, and lung donations with verified, ethical donors.<br><br>
+        Our platform operates under strict medical supervision and collaborates with top-tier hospital to guarantee that every procedure meets ethical, legal, and healthcare standards. From registration and test scheduling to the final transplant surgery, our process is handled with care and empathy—entirely <strong>free of cost</strong>.<br><br>
+        Through advanced digital tools and a public request board, we ensure complete transparency in donation requests while maintaining strict data privacy. Donora is not just a platform—it’s a movement that empowers individuals to make a meaningful impact.
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section reverse">
+    <img src="{% static 'images/Transplant team celebration.jpg' %}" alt="Mission" class="about-img-large">
+    <div class="about-content">
+      <div class="about-subtitle">Our Purpose</div>
+      <div class="about-title">Our Mission</div>
+      <div class="about-desc">
+        Donora’s mission is to eliminate financial, procedural, and logistical hurdles that prevent people from accessing organ transplants. Our goal is simple—save more lives by making donation safe, accessible, and affordable to everyone.<br><br>
+        With a strong network of hospital partners, health advisors, and volunteers, we support both donors and recipients every step of the way. No matter your background, you deserve a chance at life—and Donora exists to make that happen.
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Lives Saved</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1,200+</div>
+        <div class="stat-label">Registered Donors</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Partner Hospitals</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Free Service</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <img src="{% static 'images/Doctor assisting patient.jpg' %}" alt="How it Works" class="about-img-large">
+    <div class="about-content">
+      <div class="about-subtitle">Our Process</div>
+      <div class="about-title">How It Works</div>
+      <div class="about-desc">
+        The Donora system starts with registration—where donors and recipients create profiles. Users fill out health and personal forms tailored to their needs. Our system matches donors with recipients who have compatible profiles. Upon compatibility a schedule from the hospital is created for necessary registration and testing procedures.<br><br>
+        Once a potential match is identified, both individuals are notified and assigned to <strong>SaveLife Hospital</strong>, our trusted medical partner. Here, necessary tests like blood compatibility, HLA typing, and crossmatching, etc are conducted—completely free of charge. After which the transplantation procedure is scheduled.<br><br>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section reverse">
+    <img src="{% static 'images/medical supervission.jpg' %}" alt="Medical Supervision" class="about-img-large">
+    <div class="about-content">
+      <div class="about-subtitle">Quality Assurance</div>
+      <div class="about-title">Medical Supervision</div>
+      <div class="about-desc">
+        Every test and procedure is performed in our partnered hospitals under expert medical supervision. This ensures that safety, legality, and ethical standards are never compromised.<br><br>
+        From blood and tissue typing to surgical evaluation, all services are provided by certified professionals. Donors and recipients are never left guessing—they're guided through every step with full clarity and compassion.
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <img src="{% static 'images/Group of medical staff.jpg' %}" alt="Community" class="about-img-large">
+    <div class="about-content">
+      <div class="about-subtitle">Our Community</div>
+      <div class="about-title">Harnessing the Strength of Community</div>
+      <div class="about-desc">
+        Donora is more than just a platform—it’s a life-saving community. We believe in the power of giving, and with your support, we can save thousands of lives. Whether you're here to give or receive, we’re here for you every step of the way.<br><br>
+        Together, we build a future where hope and kindness thrive.
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to Make a Difference?</h2>
+    <p class="cta-desc">Join our community of life-savers and help us create a world where no one waits for a second chance at life.</p>
+    <div class="cta-buttons">
+      <a href="{% url 'signup' %}" class="cta-button">Become a Donor</a>
+      <a href="{% url 'signup' %}" class="cta-button secondary">Find a Match</a>
+    </div>
+  </section>
+</main>
+<br>
+<br>
+<footer>
+  <div class="footer-top">
+    <div class="footer-about">
+      <img src="{% static 'images/removed.png' %}" alt="Logo">
+      <p>Donora is dedicated to saving lives through living organ donation awareness, kindness, and collective action. Together, we give the gift of life.</p>
+    </div>
+    <div class="footer-nav-blocks">
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'FAQs' %}">FAQs</a></li>
+          <li><a href="{% url 'contactus' %}">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-get-involved">
+        <h4>Get Involved</h4>
+        <ul>
+         <li><a href="{% url 'signup' %}">Become a Donor</a></li>
+          <li><a href="{% url 'signup' %}">Become a Recipient</a></li>
+        </ul>
+      </div>
+      <div class="footer-terms">
+        <h4>Terms & Conditions</h4>
+        <ul>
+          <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+          <li><a href="{% url 'terms_of_use' %}">Terms of Use</a></li>
+          <li><a href="{% url 'security' %}">Security</a></li>
+          <li><a href="{% url 'other_policies' %}">Other Policies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+      <p> <a href="https://www.google.com/maps/search/?api=1&query=Sahyadri+Super+Speciality+Hospital,+Deccan+Gymkhana,+Pune,+Plot+No.+30-C,+Karve+Rd,+Kachare+Colony,+Deccan+Gymkhana,+Pune,+Maharashtra+411004"
+     target="_blank"
+     style="color:#1769aa;text-decoration:underline;">123 Donora Lane, Pune, India</a></p>
+      <p>info@donora.ngo</p>
+      <p>+91 123 456 7890</p>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <div class="social-heading">
+        <hr class="line">
+        <span>Connect With Us</span>
+        <hr class="line">
+      </div>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" title="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"></path></svg></a>
+        <a href="https://x.com" target="_blank" title="X"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H21L14.19 10.59 22.24 21H16.16L11.13 14.43 5.5 21H2L9.13 13.01 1.36 3H7.61L12.22 9.03 17.53 3ZM16.37 19H18.09L7.7 5H5.87L16.37 19Z"/></svg></a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:block; margin:auto;">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#14484a"/>
+            <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-7.92a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z" fill="#fff"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>
+          </svg>
+        </a>
+        <a href="mailto:info@donora.org" title="Email"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.015 6.24A2.25 2.25 0 0 1 2.25 3.75h19.5a2.25 2.25 0 0 1 2.235 2.49L12 13.065zm11.985-6.825v11.82a2.25 2.25 0 0 1-2.25 2.25H2.25a2.25 2.25 0 0 1-2.25-2.25V6.24l11.985 6.825L23.985 6.24z"></path></svg></a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 Donora Foundation | All Rights Reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('nav-menu').classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>

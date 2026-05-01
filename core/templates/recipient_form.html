@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Become Recipient – {{ organ.organ_name }}</title>
+    <style>
+        body { background: #e0ecfb; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: Arial, sans-serif; margin: 0; }
+        .form-container { background: #fff; box-shadow: 0 2px 8px rgba(25, 60, 125, 0.08), 0 1.5px 8px #a4dcfd26; border-radius: 20px; padding: 40px 32px; max-width: 400px; width: 100%; }
+        .form-title { font-size: 2rem; font-weight: 700; color: #164e98; margin-bottom: 24px; text-align: center; }
+        .alert-message { background: #f0fdf4; border: 1.5px solid #48bb78; color: #2f855a; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 1rem; }
+        .form-group { margin-bottom: 18px; }
+        .form-label { display: block; font-weight: 600; color: #3b3b3b; margin-bottom: 5px; }
+        .form-input { width: 100%; padding: 10px 14px; border: 1.5px solid #ccc; border-radius: 8px; font-size: 1rem; background: #fff; box-sizing: border-box; }
+        .form-input[disabled], select[disabled] { background: #f3f4f6; color: #a0aeb3; cursor: not-allowed; }
+        .form-error { color: #e53e3e; font-size: 0.9rem; margin-top: 5px; }
+        .submit-button { display: block; width: 100%; padding: 12px; margin-top: 18px; font-weight: 700; border: none; border-radius: 999px; background: linear-gradient(90deg, #22c55e 60%, #16a84a 100%); color: white; font-size: 1.1rem; cursor: pointer; transition: background 0.3s ease; }
+        .submit-button[disabled] { opacity: 0.65; cursor: not-allowed; }
+        .submit-button:hover:enabled { background: linear-gradient(90deg, #169b3c 60%, #136c2f 100%); }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2 class="form-title">Become Recipient – {{ organ.organ_name }}</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert-message" role="alert" id="django-message">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <div class="form-group">
+            <label class="form-label">Username</label>
+            <input class="form-input" type="text" value="{{ request.user.username }}" disabled>
+        </div>
+
+        <!-- IMPORTANT: enctype added for file uploads -->
+        <form method="post" novalidate id="recipient-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {% if form.name.errors %}<p class="form-error">{{ form.name.errors }}</p>{% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.age.label_tag }}
+                {{ form.age }}
+                {% if form.age.errors %}<p class="form-error">{{ form.age.errors }}</p>{% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.blood_group.label_tag }}
+                {{ form.blood_group }}
+                {% if form.blood_group.errors %}<p class="form-error">{{ form.blood_group.errors }}</p>{% endif %}
+            </div>
+
+            <!-- Replaced Aadhaar number with image upload -->
+            <div class="form-group">
+                <label class="form-label">Aadhaar Image (PDF or image)</label>
+                <h3 style="color: #f00;">Upload your Aadhaar Card for authentication</h3>
+                {{ form.aadhar_image }}
+                {% if form.aadhar_image.errors %}<p class="form-error">{{ form.aadhar_image.errors }}</p>{% endif %}
+            </div>
+
+            <!-- New blood report upload -->
+            <div class="form-group">
+                <label class="form-label">Blood Report (PDF or image)</label>
+                {{ form.blood_report }}
+                {% if form.blood_report.errors %}<p class="form-error">{{ form.blood_report.errors }}</p>{% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.contact.label_tag }}
+                {{ form.contact }}
+                {% if form.contact.errors %}<p class="form-error">{{ form.contact.errors }}</p>{% endif %}
+            </div>
+
+            <button type="submit" class="submit-button" id="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var djangoMessage = document.getElementById('django-message');
+            if (djangoMessage) {
+                var successKeywords = ["Thank you", "registered as recipient", "has been recorded", "successful"];
+                var isSuccess = successKeywords.some(function(word) {
+                    return djangoMessage.textContent && djangoMessage.textContent.toLowerCase().includes(word.toLowerCase());
+                });
+                if (isSuccess) {
+                    var form = document.getElementById('recipient-form');
+                    if (form) Array.from(form.elements).forEach(function(el) { el.disabled = true; });
+                    setTimeout(function() { window.location.href = "{% url 'organ' %}"; }, 3000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

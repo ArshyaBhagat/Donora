@@ -1,14 +1,36 @@
-# 🩺 Donora – Living Organ Donation Platform
+# 🩺 Donora – Organ Donation Platform
 
 ## 🧩 Overview
 
-Donora is a **non-profit web-based platform** developed using **Python (Django)** that connects living organ donors and recipients for kidney, liver, lung, and skin transplants.
+Donora is a non-profit web-based organ donation platform developed using Python (Django) that connects living organ donors and recipients through a compatibility-based matching system.
 
-The platform implements a **rule-based donor–recipient matching system** using blood group and organ compatibility. Upon successful matching, a unique **transplantation ID** is generated for each donor–recipient pair to support transplantation tracking and management.
+The platform supports organ donation requests for kidney, liver, lung, and skin transplants. It uses donor and recipient information, including blood group and organ compatibility, to identify suitable matches and generate a unique transplantation ID for each successful donor–recipient pair.
+
+The system provides donor and recipient registration, document uploads, cancellation and re-application workflows, notification management, acknowledgment generation, and administrative monitoring functionalities.
 
 ---
 
-## ⚙️ Tech Stack
+## ✨ Features
+
+* Donor registration system
+* Recipient registration system
+* Blood group and organ compatibility matching
+* Unique transplantation ID generation
+* Donor–recipient matching workflow
+* Cancellation and re-application functionality
+* User authentication and account management
+* Notification management system
+* Secure document upload support
+* Contact submission management
+* Administrative monitoring dashboard
+* Organ-specific donor and recipient forms
+* Password management functionality
+* Acknowledgment generation for successful matches
+* Database-driven workflow automation
+
+---
+
+## 🛠️ Technologies Used
 
 ### Backend
 
@@ -17,26 +39,81 @@ The platform implements a **rule-based donor–recipient matching system** using
 
 ### Frontend
 
-* HTML
-* CSS
+* HTML5
+* CSS3
 * JavaScript
 
 ### Database
 
 * MySQL
 
+### Libraries & Packages
+
+* mysqlclient
+* Pillow
+* python-dotenv
+* ReportLab
+
 ---
 
-## 💡 Features
+## 📂 Project Structure
 
-* 🔗 Rule-based donor–recipient matching using blood group and organ compatibility
-* 📝 Registration, cancellation, and re-application workflows
-* 🆔 Unique transplantation ID generation for matched donor–recipient pairs
-* 🔐 Secure user authentication and account management
-* 🔔 Notification system for donor and recipient updates
-* 📁 Secure document upload for Aadhaar and blood reports
-* 📊 Administrative monitoring and transplantation management
-* ❤️ Free and non-profit initiative focused on social impact
+```plaintext
+Donora/
+│
+├── adminspa/
+│   ├── static/
+│   ├── templates/
+│   │   └── adminspa/
+│   │       └── index.html
+│   ├── urls.py
+│   ├── views.py
+│   └── apps.py
+│
+├── core/
+│   ├── migrations/
+│   ├── templates/
+│   │   ├── homepage.html
+│   │   ├── login.html
+│   │   ├── signup.html
+│   │   ├── donor_form.html
+│   │   ├── recipient_form.html
+│   │   ├── dashboard.html
+│   │   ├── notifications.html
+│   │   ├── acknowledgment.html
+│   │   ├── aboutus.html
+│   │   ├── contactus.html
+│   │   ├── kidney.html
+│   │   ├── liver.html
+│   │   ├── lung.html
+│   │   ├── skin.html
+│   │   ├── organ.html
+│   │   └── additional policy pages
+│   │
+│   ├── forms.py
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── context_processors.py
+│   └── admin.py
+│
+├── Donora/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+│
+├── media/
+├── static/
+├── static_src/
+├── venv/
+│
+├── .env
+├── manage.py
+├── requirements.txt
+├── README.md
+└── db.sqlite3
+```
 
 ---
 
@@ -57,16 +134,8 @@ python -m venv venv
 
 ### Activate Virtual Environment
 
-#### Windows
-
 ```bash
 venv\Scripts\activate
-```
-
-#### Linux / macOS
-
-```bash
-source venv/bin/activate
 ```
 
 ### Install Dependencies
@@ -75,62 +144,54 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Create Environment File
+### Configure Environment Variables
 
-Create a `.env` file in the project root directory:
+Create a `.env` file:
 
 ```env
-SECRET_KEY=your_secret_key_here
+SECRET_KEY=your_secret_key
 DB_PASSWORD=your_database_password
 ```
 
 ### Apply Migrations
 
 ```bash
-python manage.py makemigrations
 python manage.py migrate
 ```
 
-### Run Development Server
+### Run the Application
 
 ```bash
 python manage.py runserver
 ```
 
-Open:
-
-```text
-http://127.0.0.1:8000/
-```
-
 ---
 
-## 📂 Core Modules
+## 🔐 Security
 
-* User Authentication
-* Donor Registration
-* Recipient Registration
-* Organ Management
-* Donor–Recipient Matching
-* Notification Management
-* Transplantation Tracking
-* Re-application Management
-* Contact Submission Management
+Sensitive configuration values are stored using environment variables and excluded from version control.
+
+Examples:
+
+* `.env`
+* database credentials
+* uploaded documents
+* local environment files
+
+The platform includes authenticated user access, protected document handling, and secure database-driven workflows.
 
 ---
 
 ## 👩‍💻 Developer
 
-**Arshya Bhagat – Developer**
+**Arshya Bhagat**
 
-Responsible for the complete development of Donora, including backend development, database design, business logic implementation, frontend integration, and donor–recipient matching workflows.
+Designed and developed the complete Donora platform, including backend development, database design, donor–recipient matching logic, user workflows, document management, notification handling, and frontend integration using Django, MySQL, HTML, CSS, and JavaScript.
 
-Designed and implemented blood-group and organ compatibility matching, notification workflows, user management features, and transplantation tracking mechanisms.
-
-Developed as part of the final-year curriculum at **M.E.S. Garware College of Commerce (Autonomous), Pune**.
+Developed as a final-year academic project at M.E.S. Garware College of Commerce (Autonomous), Pune.
 
 ---
 
 ## ❤️ Vision
 
-Leveraging technology to simplify the organ donation process, improve donor–recipient connectivity, and promote meaningful social impact through accessible healthcare solutions.
+To leverage technology for simplifying organ donor and recipient matching while promoting awareness, accessibility, and social impact through a structured and efficient organ donation platform.

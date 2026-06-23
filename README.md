@@ -6,7 +6,13 @@ Donora is a non-profit web-based organ donation platform developed using Python 
 
 The platform supports organ donation requests for kidney, liver, lung, and skin transplants. It uses donor and recipient information, including blood group and organ compatibility, to identify suitable matches and generate a unique transplantation ID for each successful donor–recipient pair.
 
-The system provides donor and recipient registration, document uploads, cancellation and re-application workflows, notification management, acknowledgment generation, and administrative monitoring functionalities.
+The system provides donor and recipient registration, secure document uploads, cancellation and re-application workflows, notification management, acknowledgment generation, and transplantation tracking functionalities.
+
+The platform includes two administrative components:
+
+1. Django Admin Panel for managing users, donor and recipient records, matches, notifications, and platform operations.
+
+2. A dedicated Hospital Single Page Application (SPA) that allows hospital staff to view donor, recipient, and transplantation records, apply custom date-range filters, and export records in CSV and PDF formats for operational tracking and documentation.
 
 ---
 
@@ -16,17 +22,24 @@ The system provides donor and recipient registration, document uploads, cancella
 * Recipient registration system
 * Blood group and organ compatibility matching
 * Unique transplantation ID generation
-* Donor–recipient matching workflow
+* Automated donor–recipient matching workflow
+* Organ-specific donor and recipient applications
 * Cancellation and re-application functionality
 * User authentication and account management
 * Notification management system
 * Secure document upload support
 * Contact submission management
-* Administrative monitoring dashboard
-* Organ-specific donor and recipient forms
+* Profile management functionality
 * Password management functionality
 * Acknowledgment generation for successful matches
 * Database-driven workflow automation
+* Django Admin Panel for platform administration
+* Dedicated Hospital SPA for transplantation management
+* Date-range filtering for donor, recipient, and match records
+* CSV export functionality for hospital records
+* PDF export functionality for hospital records
+* Transplantation monitoring and record management tools
+* Responsive user interface
 
 ---
 
@@ -188,7 +201,9 @@ The platform includes authenticated user access, protected document handling, an
 
 Designed and developed the complete Donora platform, including backend development, database design, donor–recipient matching logic, user workflows, document management, notification handling, and frontend integration using Django, MySQL, HTML, CSS, and JavaScript.
 
-Developed as a final-year academic project at M.E.S. Garware College of Commerce (Autonomous), Pune.
+Implemented the Django Admin Panel for platform administration and developed a dedicated Hospital Single Page Application (SPA) for transplantation management, enabling hospital staff to view donor, recipient, and matched transplantation records, apply date-based filters, and export data in CSV and PDF formats.
+
+Developed as an academic project at M.E.S. Garware College of Commerce (Autonomous), Pune.
 
 ---
 

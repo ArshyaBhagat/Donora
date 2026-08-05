@@ -14,6 +14,12 @@ The platform includes two administrative components:
 
 2. A dedicated Hospital Single Page Application (SPA) that allows hospital staff to view donor, recipient, and transplantation records, apply custom date-range filters, and export records in CSV and PDF formats for operational tracking and documentation.
 
+## 🎥 Project Demonstration
+
+Explore the complete walkthrough showcasing the application's donor-recipient workflows, hospital dashboard, and backend functionality.
+
+▶️ **[Watch the Demo](https://youtu.be/7Pi_v69H9sU)**
+
 ---
 
 ## ✨ Features
